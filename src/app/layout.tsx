@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body>
+      <body className='flex flex-col gap-6 bg-gray-50'>
         <QueryProvider>
           <Header />
           <Nav />
