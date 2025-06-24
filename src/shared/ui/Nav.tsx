@@ -12,7 +12,7 @@ export default function Nav() {
   const [nav, setNav] = useState<Nav>('member');
 
   return (
-    <Tabs value={nav} onValueChange={(value) => setNav(value as Nav)}>
+    <Tabs className='px-4' value={nav} onValueChange={(value) => setNav(value as Nav)}>
       <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="member" className="flex items-center space-x-2">
           <Users />
