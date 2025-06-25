@@ -1,17 +1,14 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
 import { QueryProvider } from '@/shared/lib/query';
-import "./globals.css";
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-});
+import './globals.css';
+import Header from '@/shared/ui/Header';
+import Nav from '@/shared/ui/Nav';
 
 export const metadata: Metadata = {
-  title: "",
-  description: "",
+  title: '시민 화폐 광산',
+  description:
+    '광주광역시 광산구 주민을 위한 시민화폐 서비스의 운영과 관리를 담당하는 어드민 프로젝트입니다.',
 };
 
 export default function RootLayout({
@@ -21,8 +18,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className={`${inter.variable} antialiased`}>
+      <body className='flex flex-col gap-6 bg-gray-50'>
         <QueryProvider>
+          <Header />
+          <Nav />
           {children}
           <Toaster position="top-center" expand={true} richColors />
         </QueryProvider>
