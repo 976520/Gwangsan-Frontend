@@ -15,7 +15,7 @@ export default function Nav() {
   const [nav, setNav] = useState<Nav>('member');
 
   useEffect(() => {
-    setNav(pathname.slice(1) as Nav);
+    setNav(pathname.split('/')[1] as Nav);
   }, [pathname]);
 
   const handleChange = useCallback((value: string)=>{
