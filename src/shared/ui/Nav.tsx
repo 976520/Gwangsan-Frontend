@@ -2,10 +2,8 @@
 
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useCallback, useEffect, useState } from 'react';
-import Bell from '../asset/svg/Bell';
-import Users from '../asset/svg/Users';
-import FileText from '../asset/svg/FileText';
 import { useRouter, usePathname } from 'next/navigation';
+import { Bell, FileText, Users } from '../asset/svg';
 
 type Nav = 'member' | 'notice' | 'notification';
 
