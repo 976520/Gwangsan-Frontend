@@ -18,30 +18,23 @@ export default function Nav() {
     setNav(pathname.slice(1) as Nav);
   }, [pathname]);
 
-  const handleMember = useCallback(()=>{
-    router.push("/member")
-  }, [router])
-
-  const handleNotice = useCallback(()=>{
-    router.push("/notice")
-  }, [router])
-
-  const handleNotification = useCallback(()=>{
-    router.push("/notification")
+  const handleChange = useCallback((value: string)=>{
+    router.push("/" + value)
+    setNav(value as Nav)
   }, [router])
 
   return (
-    <Tabs className='px-4' value={nav} onValueChange={(value) => setNav(value as Nav)}>
+    <Tabs className='px-4' value={nav} onValueChange={handleChange}>
       <TabsList className="grid w-full grid-cols-3">
-        <TabsTrigger onClick={handleMember} value="member" className="flex items-center space-x-2">
+        <TabsTrigger value="member" className="flex items-center space-x-2">
           <Users />
           <span>회원관리</span>
         </TabsTrigger>
-        <TabsTrigger onClick={handleNotice} value="notice" className="flex items-center space-x-2">
+        <TabsTrigger  value="notice" className="flex items-center space-x-2">
           <FileText />
           <span>공지사항</span>
         </TabsTrigger>
-        <TabsTrigger onClick={handleNotification} value="notification" className="flex items-center space-x-2">
+        <TabsTrigger value="notification" className="flex items-center space-x-2">
           <Bell />
           <span>알림</span>
         </TabsTrigger>
