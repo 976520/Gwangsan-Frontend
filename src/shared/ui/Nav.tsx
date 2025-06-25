@@ -23,7 +23,7 @@ export default function Nav() {
   }, [router])
 
   const handleNotice = useCallback(()=>{
-    router.push("/Notice")
+    router.push("/notice")
   }, [router])
 
   const handleNotification = useCallback(()=>{
