@@ -18,7 +18,7 @@ const getRoleBadgeColor = (role: string) => {
   }
 }
 
-export function RoleBadge({ role, className, ...props }: RoleBadgeProps) {
+export function Badge({ role, className, ...props }: RoleBadgeProps) {
   return (
     <div
       className={cn(

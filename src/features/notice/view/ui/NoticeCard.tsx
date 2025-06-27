@@ -4,8 +4,9 @@ import { useState } from "react"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Button } from "@/shared/ui/Button"
 import { Edit, Trash2 } from "lucide-react"
-import { RoleBadge } from "@/shared/ui/Badge"
+import { Badge } from "@/shared/ui/Badge"
 import { CreateNoticeCard } from "./CreateNoticeCard"
+
 interface Notice {
   id: string
   title: string
@@ -64,7 +65,7 @@ export function NoticeCard() {
                     <p className="text-gray-600 mt-1">{notice.content}</p>
                     <div className="flex items-center space-x-4 mt-3 text-sm text-gray-500">
                       <span>작성자: {notice.author}</span>
-                      <RoleBadge role={notice.role} />
+                      <Badge role={notice.role} />
                       <span>{notice.date}</span>
                       <span>조회수: {notice.views}</span>
                     </div>

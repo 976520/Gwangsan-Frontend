@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/shared/ui/Button"
 import { Select, SelectTrigger, SelectValue, SelectItem, SelectContent } from "@/shared/ui/Select"
-
+import { Upload } from "lucide-react"
 interface Props {
   onSubmit: (notice: any) => void
 }
@@ -44,7 +44,7 @@ export function CreateNoticeCard({ onSubmit }: Props) {
           <Input
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
-            placeholder="공지사항 제목"
+            placeholder="공지사항 제목을 입력하세요"
           />
         </div>
 
@@ -53,7 +53,7 @@ export function CreateNoticeCard({ onSubmit }: Props) {
           <Textarea
             value={form.content}
             onChange={(e) => setForm({ ...form, content: e.target.value })}
-            placeholder="공지사항 내용"
+            placeholder="공지사항 내용을 입력하세요"
           />
         </div>
 
@@ -74,14 +74,19 @@ export function CreateNoticeCard({ onSubmit }: Props) {
 
         <div>
           <Label>이미지</Label>
+          <div className="flex items-center space-x-2">
           <Input
             type="file"
             accept="image/*"
             onChange={(e) => setForm({ ...form, image: e.target.files?.[0] || null })}
           />
+          <Button variant="outline" size="sm">
+            <Upload className="h-5 w-5"/>
+          </Button>
+          </div>
         </div>
 
-        <Button className="w-full" onClick={handleSubmit}>작성 완료</Button>
+        <Button className="w-full" onClick={handleSubmit}>공지사항 게시</Button>
       </CardContent>
     </Card>
   )
