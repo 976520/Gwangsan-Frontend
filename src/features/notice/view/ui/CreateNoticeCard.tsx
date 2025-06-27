@@ -8,11 +8,13 @@ import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/shared/ui/Button"
 import FileUpload from "@/shared/ui/FileUpload"
 import { RoleSelect } from "@/shared/ui/Select"
-interface Props {
-  onSubmit: (notice: any) => void
+import { Notice } from "@/entities/notice/model/types"
+
+interface CreateNoticeProps {
+  createNotice: (notice: Notice) => void
 }
 
-export function CreateNoticeCard({ onSubmit }: Props) {
+export function CreateNoticeCard({ createNotice }: CreateNoticeProps) {
   const [form, setForm] = useState({
     title: "",
     content: "",
@@ -28,7 +30,7 @@ export function CreateNoticeCard({ onSubmit }: Props) {
       date: new Date().toISOString().slice(0, 10),
       views: 0,
     }
-    onSubmit(newNotice)
+    createNotice(newNotice)
     setForm({ title: "", content: "", role: "", image: null }) 
   }
 
