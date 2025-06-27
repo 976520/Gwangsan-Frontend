@@ -25,11 +25,3 @@ import {
       </Select>
     )
   }
-
-  export {
-    Select,
-    SelectTrigger,
-    SelectValue,
-    SelectContent,
-    SelectItem,
-  }

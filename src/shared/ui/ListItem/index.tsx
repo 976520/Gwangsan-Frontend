@@ -1,17 +1,8 @@
 import { Edit, Trash2 } from "lucide-react"
 import { Button } from "@/shared/ui/Button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/Card"
-import { RoleBadge } from "@/shared/ui/Badge"
-
-interface Notice {
-  id: string
-  title: string
-  content: string
-  author: string
-  role: string
-  date: string
-  views: number
-}
+import { Badge } from "@/shared/ui/Badge"
+import { Notice } from "@/entities/notice/model/types"
 
 interface NoticeListProps {
   notices: Notice[]
@@ -40,7 +31,7 @@ export default function ListItem({ notices }: NoticeListProps) {
                   <p className="text-gray-600 mt-1">{notice.content}</p>
                   <div className="flex items-center space-x-4 mt-3 text-sm text-gray-500">
                     <span>작성자: {notice.author}</span>
-                    <RoleBadge role={notice.role} /> 
+                    <Badge role={notice.role} /> 
                     <span>{notice.date}</span>
                     <span>조회수: {notice.views}</span>
                   </div>

@@ -6,8 +6,8 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/shared/ui/Button"
-import { Select, SelectTrigger, SelectValue, SelectItem, SelectContent } from "@/shared/ui/Select"
-import { Upload } from "lucide-react"
+import FileUpload from "@/shared/ui/FileUpload"
+import { RoleSelect } from "@/shared/ui/Select"
 interface Props {
   onSubmit: (notice: any) => void
 }
@@ -24,7 +24,7 @@ export function CreateNoticeCard({ onSubmit }: Props) {
     const newNotice = {
       ...form,
       id: Date.now().toString(),
-      author: "관리자",
+      author: "새로운이름",
       date: new Date().toISOString().slice(0, 10),
       views: 0,
     }
@@ -59,31 +59,18 @@ export function CreateNoticeCard({ onSubmit }: Props) {
 
         <div>
           <Label>대상 역할</Label>
-          <Select
+          <RoleSelect
             value={form.role}
-            onValueChange={(value) => setForm({ ...form, role: value })}
-          >
-            <SelectTrigger><SelectValue placeholder="역할 선택" /></SelectTrigger>
-            <SelectContent>
-              <SelectItem value="전체">전체</SelectItem>
-              <SelectItem value="코디네이터">코디네이터</SelectItem>
-              <SelectItem value="사무국">사무국</SelectItem>
-            </SelectContent>
-          </Select>
+            onChange={(value) => setForm({ ...form, role: value })} 
+            />
         </div>
 
         <div>
-          <Label>이미지</Label>
-          <div className="flex items-center space-x-2">
-          <Input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setForm({ ...form, image: e.target.files?.[0] || null })}
-          />
-          <Button variant="outline" size="sm">
-            <Upload className="h-5 w-5"/>
-          </Button>
-          </div>
+          <Label>첨부 이미지</Label>
+          <FileUpload 
+            id="notice-image"
+            onChange={(file) => setForm({ ...form, image: file })}
+            />
         </div>
 
         <Button className="w-full" onClick={handleSubmit}>공지사항 게시</Button>
