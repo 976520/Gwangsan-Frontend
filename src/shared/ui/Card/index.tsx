@@ -1,1 +1,15 @@
-// 박스 형태의 UI 컨테이너 (공지 카드, 대시보드 카드 등)
+import {
+    Card as ShadCard,
+    CardHeader as ShadCardHeader,
+    CardTitle as ShadCardTitle,
+    CardDescription as ShadCardDescription,
+    CardContent as ShadCardContent,
+    CardFooter as ShadCardFooter,
+  } from "@/components/ui/card"
+  
+  export const Card = ShadCard
+  export const CardHeader = ShadCardHeader
+  export const CardTitle = ShadCardTitle
+  export const CardDescription = ShadCardDescription
+  export const CardContent = ShadCardContent
+  export const CardFooter = ShadCardFooter

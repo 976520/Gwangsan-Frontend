@@ -1,1 +1,6 @@
-// 다양한 스타일/크기의 버튼을 하나의 컴포넌트로 통합 관리
+import { Button as ShadcnButton } from "@/components/ui/button";
+import type { ButtonProps } from "@/components/ui/button";
+
+export function Button(props: ButtonProps) {
+  return <ShadcnButton {...props} />;
+}
