@@ -6,8 +6,9 @@ import NoticeCard from "@/features/notice/view/ui/NoticeCard";
 import { createNoticeForm } from "@/shared/api/createNoticeForm";
 import { fetchNotices } from "@/shared/api/fetchNotices";
 import { useEffect, useState } from "react";
+import { deleteNotice } from "@/shared/api/deleteNotice";
 
-export default function Notice() {  
+export default function Notice() {
   const [notices, setNotices] = useState<Notice[]>([])
 
   useEffect(() => {
@@ -23,11 +24,15 @@ export default function Notice() {
     setNotices((prev) => [notice, ...prev])
   }
 
+  const deleteNoticeInList = (id: number) => {
+    deleteNotice(id)
+    setNotices((prev) => notices.filter((notice) => notice.id != id))
+  }
+
   return (
     <div className="py-2 px-12">
       <CreateNoticeCard createNotice={createNotice} />
-      <NoticeCard notices={notices} />
+      <NoticeCard notices={notices} deleteNotice={deleteNoticeInList} />
     </div>
   )
 }
-  

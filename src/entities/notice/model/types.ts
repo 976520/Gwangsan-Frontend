@@ -1,10 +1,10 @@
 export interface Notice {
-    id: string
+    id: number
     title: string
     content: string
     role: string
     author: string
     date: string
     views: number
-    image?: File | null
+    images: string[]
 }

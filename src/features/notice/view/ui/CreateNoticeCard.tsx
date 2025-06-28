@@ -11,27 +11,28 @@ import { RoleSelect } from "@/shared/ui/Select"
 import { Notice } from "@/entities/notice/model/types"
 
 interface CreateNoticeProps {
-  createNotice: (notice: Notice) => void
+  createNotice: (notice: Notice, file: File[]) => void
 }
 
 export function CreateNoticeCard({ createNotice }: CreateNoticeProps) {
+  const [files, setFiles] = useState<File[]>([])
   const [form, setForm] = useState({
     title: "",
     content: "",
     role: "",
-    image: null as File | null,
+    images: [],
   })
 
   const handleSubmit = () => {
     const newNotice = {
       ...form,
-      id: Date.now().toString(),
+      id: Date.now(),
       author: "새로운이름",
       date: new Date().toISOString().slice(0, 10),
       views: 0,
     }
-    createNotice(newNotice)
-    setForm({ title: "", content: "", role: "", image: null }) 
+    createNotice(newNotice, [])
+    setForm({ title: "", content: "", role: "", images: [] })
   }
 
   return (
@@ -69,9 +70,11 @@ export function CreateNoticeCard({ createNotice }: CreateNoticeProps) {
 
         <div>
           <Label>첨부 이미지</Label>
-          <FileUpload 
+          <FileUpload
             id="notice-image"
-            onChange={(file) => setForm({ ...form, image: file })}
+            onChange={(file) => {
+              setFiles((prev) => file ? [file, ...prev] : [...prev])
+            }}
             />
         </div>
 

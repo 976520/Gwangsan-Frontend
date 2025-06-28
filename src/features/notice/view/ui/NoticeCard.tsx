@@ -1,14 +1,15 @@
 import { Edit, Trash2 } from "lucide-react"
 import { Button } from "@/shared/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/Card"
-import { Badge } from "@/shared/ui/Badge"
+import { BadgeSelect } from "@/shared/ui/BadgeSelect"
 import { Notice } from "@/entities/notice/model/types"
 
 interface NoticeListProps {
   notices: Notice[]
+  deleteNotice: (id: number) => void
 }
 
-export default function NoticeCard({ notices }: NoticeListProps) {
+export default function NoticeCard({ notices, deleteNotice }: NoticeListProps) {
   return (
     <Card>
       <CardHeader>
@@ -31,7 +32,7 @@ export default function NoticeCard({ notices }: NoticeListProps) {
                   <p className="text-gray-600 mt-1">{notice.content}</p>
                   <div className="flex items-center space-x-4 mt-3 text-sm text-gray-500">
                     <span>작성자: {notice.author}</span>
-                    <Badge role={notice.role} /> 
+                    <BadgeSelect role={notice.role} />
                     <span>{notice.date}</span>
                     <span>조회수: {notice.views}</span>
                   </div>
@@ -43,7 +44,9 @@ export default function NoticeCard({ notices }: NoticeListProps) {
                   <Button variant="outline" size="sm">
                     <Edit className="h-4 w-4" />
                   </Button>
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="sm" onClick={() => {
+                    deleteNotice(notice.id)
+                  }}>
                     <Trash2 className="h-4 w-4" />
                   </Button>
                 </div>

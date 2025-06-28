@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils"
 import * as React from "react"
+import { Badge } from "@/components/ui/badge"
 
 interface RoleBadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   role: string
@@ -18,7 +19,7 @@ const getRoleBadgeColor = (role: string) => {
   }
 }
 
-export function Badge({ role, className, ...props }: RoleBadgeProps) {
+export function BadgeSelect({ role, className, ...props }: RoleBadgeProps) {
   return (
     <div
       className={cn(
