@@ -2,7 +2,7 @@ import {
   NotificationData,
   NOTIFICATION_TYPES,
   NOTIFICATION_STATUSES
-} from "@/entities/NotificationItem/model/notificationType";
+} from "@/entities/notification/model/notificationType";
 
 export const mockNotifications: NotificationData[] = [
   {
