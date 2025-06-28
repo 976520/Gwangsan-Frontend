@@ -67,6 +67,7 @@ export default function SignupView() {
                     placeholder="6자리 인증번호"
                     className="pl-10"
                     maxLength={6}
+                    minLength={6}
                     required
                   />
                 </div>
@@ -83,6 +84,8 @@ export default function SignupView() {
                   name="password"
                   placeholder="비밀번호를 입력하세요 (8자 이상)"
                   className="pl-10 pr-10"
+                  type="password"
+                  minLength={8}
                   required
                 />
                 <button
@@ -99,9 +102,11 @@ export default function SignupView() {
                 <Input
                   id="confirmPassword"
                   name="confirmPassword"
+                  minLength={8}
                   placeholder="비밀번호를 다시 입력하세요"
                   className="pl-10 pr-10"
                   required
+                  type="password"
                 />
               </div>
             </div>
