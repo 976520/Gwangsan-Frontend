@@ -14,8 +14,6 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Phone, Lock, MessageSquare } from 'lucide-react';
 
 export default function SignupView() {
@@ -32,14 +30,6 @@ export default function SignupView() {
         </CardHeader>
         <form>
           <CardContent className="space-y-4">
-            <Alert variant="destructive">
-              <AlertDescription></AlertDescription>
-            </Alert>
-
-            <Alert>
-              <AlertDescription className="text-green-600"></AlertDescription>
-            </Alert>
-
             <div className="space-y-2">
               <Label htmlFor="phone">전화번호</Label>
               <div className="flex space-x-2">
@@ -82,9 +72,6 @@ export default function SignupView() {
                 </div>
                 <Button type="button">확인</Button>
               </div>
-              <p className="text-xs text-gray-500">
-                테스트용 인증번호: <span className="font-mono">123456</span>
-              </p>
             </div>
 
             <div className="space-y-2">
@@ -120,34 +107,6 @@ export default function SignupView() {
                   type="button"
                   className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
                 ></button>
-              </div>
-            </div>
-
-            <div className="space-y-3">
-              <div className="flex items-center space-x-2">
-                <Checkbox id="agreeTerms" />
-                <Label htmlFor="agreeTerms" className="text-sm">
-                  <Link
-                    href="/terms"
-                    className="text-blue-600 hover:text-blue-500"
-                  >
-                    이용약관
-                  </Link>
-                  에 동의합니다
-                </Label>
-              </div>
-
-              <div className="flex items-center space-x-2">
-                <Checkbox id="agreePrivacy" />
-                <Label htmlFor="agreePrivacy" className="text-sm">
-                  <Link
-                    href="/privacy"
-                    className="text-blue-600 hover:text-blue-500"
-                  >
-                    개인정보처리방침
-                  </Link>
-                  에 동의합니다
-                </Label>
               </div>
             </div>
           </CardContent>

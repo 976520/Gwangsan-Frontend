@@ -63,30 +63,12 @@ export default function SigninView() {
                 ></button>
               </div>
             </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <input
-                  id="remember"
-                  name="remember"
-                  type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
-                <Label htmlFor="remember" className="text-sm">
-                  로그인 상태 유지
-                </Label>
-              </div>
-              <Link
-                href="/forgot-password"
-                className="text-sm text-blue-600 hover:text-blue-500"
-              >
-                비밀번호 찾기
-              </Link>
-            </div>
           </CardContent>
 
           <CardFooter className="flex flex-col space-y-4">
-            <Button type="submit" className="w-full"></Button>
+            <Button type="submit" className="w-full">
+              로그인
+            </Button>
 
             <div className="text-center text-sm">
               <span className="text-gray-600">계정이 없으신가요? </span>
