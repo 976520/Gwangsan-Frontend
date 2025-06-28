@@ -103,10 +103,6 @@ export default function SignupView() {
                   className="pl-10 pr-10"
                   required
                 />
-                <button
-                  type="button"
-                  className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
-                ></button>
               </div>
             </div>
           </CardContent>
@@ -119,7 +115,7 @@ export default function SignupView() {
             <div className="text-center text-sm">
               <span className="text-gray-600">이미 계정이 있으신가요? </span>
               <Link
-                href="/login"
+                href="/signin"
                 className="font-medium text-blue-600 hover:text-blue-500"
               >
                 로그인
