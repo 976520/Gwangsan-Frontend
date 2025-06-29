@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, XCircle } from "lucide-react";
@@ -20,13 +21,15 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
   onAction, 
   onMemberSuspend 
 }) => {
-  const handleApprove = () => {
-    onAction(notification.id, NOTIFICATION_STATUSES.승인됨);
-  };
+  
 
-  const handleReject = () => {
+  const handleApprove = useCallback(() => {
+    onAction(notification.id, NOTIFICATION_STATUSES.승인됨);
+  }, [onAction, notification.id]);
+
+  const handleReject = useCallback(() => {
     onAction(notification.id, NOTIFICATION_STATUSES.거절됨);
-  };
+  }, [onAction, notification.id]);
 
   return (
     <section className="border rounded-lg p-4">
