@@ -53,6 +53,7 @@ export default function SigninView() {
                 <Input
                   id="password"
                   name="password"
+                  type="password"
                   placeholder="비밀번호를 입력하세요"
                   className="pl-10 pr-10"
                   required
