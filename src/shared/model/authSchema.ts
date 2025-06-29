@@ -6,7 +6,7 @@ export const SigninSchema = z.object({
 });
 
 export const SignupSchema = SigninSchema.extend({
-  certificationCode: z.string().length(6, '인증번호는 6자리여야 합니다.'),
+  verificationCode: z.string().length(6, '인증번호는 6자리여야 합니다.'),
   confirmPassword: z
     .string()
     .min(8, '비밀번호 확인은 최소 8자리 이상이어야 합니다.'),
