@@ -7,7 +7,7 @@ import NoticeDetail from "@/shared/ui/NoticeDetail/page"
 import { useRouter } from "next/navigation"
 import { mockNotices } from "@/shared/mock/notices"
 
-export default function Page({ params }: { params: Promise<{ id: string }> }) {
+export default function Update({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter()
   const [notice, setNotice] = useState<Notice | null>(null)
 
@@ -37,7 +37,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
           </div>
         )
 
-
+        
       }
     </div>
 

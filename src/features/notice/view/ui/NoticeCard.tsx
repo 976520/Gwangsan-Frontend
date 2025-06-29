@@ -3,6 +3,7 @@ import { Button } from "@/shared/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/Card"
 import { BadgeSelect } from "@/shared/ui/BadgeSelect"
 import { Notice } from "@/entities/notice/model/types"
+import { useRouter } from "next/navigation";
 
 interface NoticeListProps {
   notices: Notice[]
@@ -10,6 +11,13 @@ interface NoticeListProps {
 }
 
 export default function NoticeCard({ notices, deleteNotice }: NoticeListProps) {
+  const router = useRouter()
+
+  const handleUpdate = (id: number) => {
+    router.push(`/notice/${id}/update`)
+
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -41,7 +49,9 @@ export default function NoticeCard({ notices, deleteNotice }: NoticeListProps) {
                   <Button variant="outline" size="sm" asChild>
                     <a href={`/notice/${notice.id}`}>상세보기</a>
                   </Button>
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="sm" onClick={() => {
+                    handleUpdate(notice.id)
+                  }}>
                     <Edit className="h-4 w-4" />
                   </Button>
                   <Button variant="outline" size="sm" onClick={() => {

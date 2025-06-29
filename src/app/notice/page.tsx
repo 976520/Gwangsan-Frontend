@@ -7,47 +7,20 @@ import { createNoticeForm } from "@/shared/api/createNoticeForm";
 import { fetchNotices } from "@/shared/api/fetchNotices";
 import { useEffect, useState } from "react";
 import { deleteNotice } from "@/shared/api/deleteNotice";
+import { mockNotices } from "@/shared/mock/notices";
 
 export default function Notice() {
-  const [notices, setNotices] = useState<Notice[]>([
-    {
-      id: 1,
-      title: 'Hello World',
-      content: 'asdf',
-      role: 'asdf',
-      author: 'me',
-      date: '2025-04-04',
-      views: 0,
-      images: ['/placeholder.svg']
-    },
-    {
-      id: 2,
-      title: 'Hello Worl2',
-      content: 'asdf',
-      role: 'asdf',
-      author: 'me',
-      date: '2025-04-04',
-      views: 0,
-      images: ['/example.svg']
-    },
-    {
-      id: 3,
-      title: 'Hello World 3',
-      content: 'asdf',
-      role: 'asdf',
-      author: 'me',
-      date: '2025-04-04',
-      views: 0,
-      images: ['/placeholder.svg']
-    },
-  ])
+  const [notices, setNotices] = useState<Notice[]>([])
 
   useEffect(() => {
     const getNotices = async () => {
-      // const newNotices = await fetchNotices()
-      // setNotices(newNotices)
+      const newNotices = await fetchNotices()
+      setNotices(newNotices)
     }
     getNotices()
+
+    // TODO 목데이터 나중에 지우기
+    setNotices(mockNotices)
   }, [])
 
   const createNotice = (notice: Notice) => {
