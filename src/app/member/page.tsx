@@ -1,3 +1,5 @@
-export default function MemberPage(){
-    return <div></div>
+import MemberView from '@/views/member/ui';
+
+export default function MemberPage() {
+  return <MemberView />;
 }
