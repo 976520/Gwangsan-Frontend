@@ -9,12 +9,43 @@ import { useEffect, useState } from "react";
 import { deleteNotice } from "@/shared/api/deleteNotice";
 
 export default function Notice() {
-  const [notices, setNotices] = useState<Notice[]>([])
+  const [notices, setNotices] = useState<Notice[]>([
+    {
+      id: 1,
+      title: 'Hello World',
+      content: 'asdf',
+      role: 'asdf',
+      author: 'me',
+      date: '2025-04-04',
+      views: 0,
+      images: ['/placeholder.svg']
+    },
+    {
+      id: 2,
+      title: 'Hello Worl2',
+      content: 'asdf',
+      role: 'asdf',
+      author: 'me',
+      date: '2025-04-04',
+      views: 0,
+      images: ['/example.svg']
+    },
+    {
+      id: 3,
+      title: 'Hello World 3',
+      content: 'asdf',
+      role: 'asdf',
+      author: 'me',
+      date: '2025-04-04',
+      views: 0,
+      images: ['/placeholder.svg']
+    },
+  ])
 
   useEffect(() => {
     const getNotices = async () => {
-      const newNotices = await fetchNotices()
-      setNotices(newNotices)
+      // const newNotices = await fetchNotices()
+      // setNotices(newNotices)
     }
     getNotices()
   }, [])
