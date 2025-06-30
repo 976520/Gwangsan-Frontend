@@ -50,7 +50,7 @@ export default function MemberList({ members }: MemberListProps) {
   return members.map((member) => (
     <TableRow key={member.id}>
       <TableCell className="flex items-center space-x-3">
-        <Avatar className="h-10 w-10">
+        <Avatar className="size-10">
           <AvatarImage src={member.avatar || '/placeholder.svg'} />
           <AvatarFallback>{member.name[0]}</AvatarFallback>
         </Avatar>
