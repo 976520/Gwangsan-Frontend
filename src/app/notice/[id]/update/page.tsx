@@ -1,7 +1,7 @@
 'use client';
 
 import { fetchNoticeById } from '@/shared/api/fetchNoticeById';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import type { Notice } from '@/entities/notice/model/types';
 import { UpdateNoticeCard } from '@/features/notice/view/ui/UpdateNoticeCard';
 import { useRouter } from 'next/navigation';
@@ -16,34 +16,50 @@ export default function Update({
   params: Promise<{ id: string }>;
 }) {
   const router = useRouter();
-  const [notice, setNotice] = useState<Notice | null>(null);
+  const [data, setData] = useState<FormValues | null>(null);
+  const [id, setId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchId = async () => {
+      const { id } = await params;
+      setId(id);
+    };
+    fetchId();
+  }, [params]);
 
   useEffect(() => {
     const fetchNotice = async () => {
-      const { id } = await params;
       // const data = await fetchNoticeById(id);
       // setNotice(data);
       const mock = mockNotices.find((p) => p.id.toString() == id);
-      mock && setNotice(mock);
+      const data: FormValues = {
+        title: mock?.title ?? '',
+        content: mock?.content ?? '',
+        role: mock?.role ?? '',
+        images: [],
+      };
+
+      mock && setData(data);
     };
     fetchNotice();
-  }, [params]);
+  }, [id]);
 
-  const updateNotice = async (
-    id: number,
-    notice: Partial<Notice>,
-    files: File[],
-  ) => {
-    // TODO 수정하는 코드 작성
-    const response = await updateNoticeForm(id, notice);
-    if (response.status == 200) {
-      router.push('/notice');
-    }
-  };
+  const updateNotice = useCallback(
+    async (changedForm: FormValues) => {
+      if (id) {
+        // TODO 수정하는 코드 작성
+        const response = await updateNoticeForm(id, changedForm);
+        if (response.status == 200) {
+          router.push('/notice');
+        }
+      }
+    },
+    [id, router],
+  );
 
   const onBack = () => {
     router.push('/notice');
   };
 
-  return <UpdateNoticeView updateNotice={updateNotice} notice={notice} />;
+  return <UpdateNoticeView updateNotice={updateNotice} initialForm={data} />;
 }

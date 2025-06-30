@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Notice } from '@/entities/notice/model/types';
 
-export function useNotice(onSubmit: (notice: Notice, file: File[]) => void) {
+export function useNotice(onSubmit: (data: FormValues) => void) {
   const [files, setFiles] = useState<File[]>([]);
 
   const handleFileChange = (file: File | null) => {
@@ -9,18 +9,12 @@ export function useNotice(onSubmit: (notice: Notice, file: File[]) => void) {
   };
 
   const handleSubmit = (formData: FormData) => {
-    const newNotice: Notice = {
-      id: Date.now(),
-      author: '새로운이름',
-      date: new Date().toISOString().slice(0, 10),
-      views: 0,
+    onSubmit({
       title: formData.get('title') as string,
       content: formData.get('content') as string,
       role: formData.get('role') as string,
-      images: [],
-    };
-
-    onSubmit(newNotice, files);
+      images: files,
+    });
   };
 
   return {

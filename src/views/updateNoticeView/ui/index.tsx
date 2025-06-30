@@ -1,19 +1,20 @@
-import { Notice } from '@/entities/notice/model/types';
-import { UpdateNoticeCard } from '@/features/notice/view/ui/UpdateNoticeCard';
-
+import { UpdateNoticeCard } from '@/features/notice/view/ui/UpdateNoticeCard
 interface UpdateNoticeViewProps {
-  notice: Notice | null;
-  updateNotice: (id: number, notice: Partial<Notice>, files: File[]) => void;
+  initialForm: FormValues | null;
+  updateNotice: (changedForm: FormValues) => void;
 }
 
 export default function UpdateNoticeView({
-  notice,
+  initialForm,
   updateNotice,
 }: UpdateNoticeViewProps) {
   return (
     <div className="px-12 py-2">
-      {notice ? (
-        <UpdateNoticeCard updateNotice={updateNotice} initNotice={notice} />
+      {initialForm ? (
+        <UpdateNoticeCard
+          updateNotice={updateNotice}
+          initialForm={initialForm}
+        />
       ) : (
         <div>
           <p>로딩중...</p>
