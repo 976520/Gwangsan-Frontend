@@ -6,6 +6,7 @@ import { Notice } from '@/entities/notice/model/types';
 import NoticeForm from './NoticeForm';
 import { Card, CardDescription, CardTitle } from '@/shared/ui/Card';
 import { CardHeader } from '@/components/ui/card';
+import { FormValues } from '../model/NoticeForm';
 
 interface CreateNoticeProps {
   createNotice: (data: FormValues) => void;

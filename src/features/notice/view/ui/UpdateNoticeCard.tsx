@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/card';
 import { useRouter } from 'next/navigation';
 import NoticeForm from './NoticeForm';
+import { FormValues } from '../model/NoticeForm';
 
 interface UpdateNoticeProps {
   updateNotice: (changedForm: FormValues) => void;

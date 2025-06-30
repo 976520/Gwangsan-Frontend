@@ -1,5 +1,6 @@
 import { createNoticeForm } from '@/shared/api/createNoticeForm';
 import { type Notice } from '@/entities/notice/model/types';
+import { FormValues } from '../model/NoticeForm';
 
 export const useCreateNotice = (
   setNotices: React.Dispatch<React.SetStateAction<Notice[]>>,

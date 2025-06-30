@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { RoleSelect } from '@/shared/ui/Select';
 import FileUpload from '@/shared/ui/FileUpload';
 import { Button } from '@/components/ui/button';
+import { FormValues } from '../model/NoticeForm';
 
 interface NoticeFormProps {
   handleNotice: (data: FormValues) => void;

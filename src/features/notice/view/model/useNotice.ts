@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Notice } from '@/entities/notice/model/types';
+import { FormValues } from './NoticeForm';
 
 export function useNotice(onSubmit: (data: FormValues) => void) {
   const [files, setFiles] = useState<File[]>([]);

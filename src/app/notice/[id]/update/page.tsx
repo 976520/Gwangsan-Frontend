@@ -9,6 +9,7 @@ import { mockNotices } from '@/shared/mock/notices';
 import { instance } from '@/shared/lib/axios';
 import { updateNoticeForm } from '@/shared/api/updateNoticeForm';
 import UpdateNoticeView from '@/views/updateNoticeView/ui';
+import { FormValues } from '@/features/notice/view/model/NoticeForm';
 
 export default function Update({
   params,

@@ -1,3 +1,4 @@
+import { FormValues } from '@/features/notice/view/model/NoticeForm';
 import { UpdateNoticeCard } from '@/features/notice/view/ui/UpdateNoticeCard';
 
 interface UpdateNoticeViewProps {
