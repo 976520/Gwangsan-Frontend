@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import NoticeDetail from '@/shared/ui/NoticeDetail/page';
+import NoticeDetail from '@/shared/ui/NoticeDetail';
 import { useNoticeDetail } from '../lib/useNoticeDetail';
 
 export default function NoticeDetailCard({ id }: { id: string }) {
