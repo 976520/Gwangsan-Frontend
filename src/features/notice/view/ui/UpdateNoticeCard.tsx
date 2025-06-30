@@ -17,6 +17,7 @@ import { RoleSelect } from '@/shared/ui/Select';
 import { Notice } from '@/entities/notice/model/types';
 import { useRouter } from 'next/navigation';
 import Form from 'next/form';
+import useNoticeForm from '../model/useNoticeForm';
 
 interface UpdateNoticeProps {
   updateNotice: (id: number, notice: Partial<Notice>, files: File[]) => void;
@@ -29,20 +30,8 @@ export function UpdateNoticeCard({
 }: UpdateNoticeProps) {
   const router = useRouter();
   const [files, setFiles] = useState<File[]>([]);
-  const [form, setForm] = useState<Notice>({
-    id: 0,
-    title: '',
-    content: '',
-    role: '',
-    images: [],
-    author: '',
-    date: '',
-    views: 0,
-  });
 
-  useEffect(() => {
-    setForm(initNotice);
-  }, [initNotice]);
+  const { form, setForm } = useNoticeForm(initNotice);
 
   const handleSubmit = (formData: FormData) => {
     updateNotice(initNotice.id, form, files);
@@ -71,7 +60,7 @@ export function UpdateNoticeCard({
             <Label>내용</Label>
             <Textarea
               name="content"
-              defaultValue={form.content}
+              value={form.content}
               onChange={(e) => setForm({ ...form, content: e.target.value })}
               placeholder="공지사항 내용을 입력하세요"
             />
@@ -80,7 +69,7 @@ export function UpdateNoticeCard({
           <div>
             <Label>대상 역할</Label>
             <RoleSelect
-              defaultValue={form.role}
+              value={form.role}
               onChange={(value) => setForm({ ...form, role: value })}
             />
           </div>

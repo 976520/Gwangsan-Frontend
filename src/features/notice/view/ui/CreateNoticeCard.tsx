@@ -16,6 +16,7 @@ import { RoleSelect } from '@/shared/ui/Select';
 import Form from 'next/form';
 import { useNotice } from '../model/useNotice';
 import { Notice } from '@/entities/notice/model/types';
+import useNoticeForm from '../model/useNoticeForm';
 
 interface CreateNoticeProps {
   createNotice: (notice: Notice, file: File[]) => void;
@@ -23,6 +24,7 @@ interface CreateNoticeProps {
 
 export function CreateNoticeCard({ createNotice }: CreateNoticeProps) {
   const { files, handleFileChange, handleSubmit } = useNotice(createNotice);
+  const { form, setForm } = useNoticeForm();
 
   return (
     <Card>
@@ -36,17 +38,31 @@ export function CreateNoticeCard({ createNotice }: CreateNoticeProps) {
         <CardContent className="space-y-4">
           <div>
             <Label>제목</Label>
-            <Input name="title" placeholder="공지사항 제목을 입력하세요" />
+            <Input
+              name="title"
+              value={form.title}
+              onChange={(e) => setForm({ ...form, title: e.target.value })}
+              placeholder="공지사항 제목을 입력하세요"
+            />
           </div>
 
           <div>
             <Label>내용</Label>
-            <Textarea name="content" placeholder="공지사항 내용을 입력하세요" />
+            <Textarea
+              name="content"
+              placeholder="공지사항 내용을 입력하세요"
+              onChange={(e) => setForm({ ...form, content: e.target.value })}
+              value={form.content}
+            />
           </div>
 
           <div>
             <Label>대상 역할</Label>
-            <RoleSelect name="role" />
+            <RoleSelect
+              name="role"
+              value={form.role}
+              onChange={(value) => setForm({ ...form, role: value })}
+            />
           </div>
 
           <div>
