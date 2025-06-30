@@ -1,0 +1,38 @@
+export const sampleMembers = [
+  {
+    id: 1,
+    name: '김철수',
+    email: 'kim@example.com',
+    role: 'cody',
+    status: 'active',
+    joinDate: '2024-01-15',
+    avatar: '/placeholder.svg?height=40&width=40',
+  },
+  {
+    id: 2,
+    name: '이영희',
+    email: 'lee@example.com',
+    role: 'admin',
+    status: 'active',
+    joinDate: '2024-02-20',
+    avatar: '/placeholder.svg?height=40&width=40',
+  },
+  {
+    id: 3,
+    name: '박민수',
+    email: 'park@example.com',
+    role: 'standard',
+    status: 'ban',
+    joinDate: '2024-03-10',
+    avatar: '/placeholder.svg?height=40&width=40',
+  },
+  {
+    id: 4,
+    name: '정수진',
+    email: 'jung@example.com',
+    role: 'standard',
+    status: 'active',
+    joinDate: '2024-04-05',
+    avatar: '/placeholder.svg?height=40&width=40',
+  },
+];
