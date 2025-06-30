@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import {
   Card,
   CardHeader,
@@ -14,29 +13,16 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/shared/ui/Button';
 import FileUpload from '@/shared/ui/FileUpload';
 import { RoleSelect } from '@/shared/ui/Select';
-import { Notice } from '@/entities/notice/model/types';
 import Form from 'next/form';
+import { useNotice } from '../model/useNotice';
+import { Notice } from '@/entities/notice/model/types';
 
 interface CreateNoticeProps {
   createNotice: (notice: Notice, file: File[]) => void;
 }
 
 export function CreateNoticeCard({ createNotice }: CreateNoticeProps) {
-  const [files, setFiles] = useState<File[]>([]);
-
-  const handleSubmit = (formData: FormData) => {
-    const newNotice: Notice = {
-      id: Date.now(),
-      author: '새로운이름',
-      date: new Date().toISOString().slice(0, 10),
-      views: 0,
-      title: formData.get('title') as string,
-      content: formData.get('content') as string,
-      role: formData.get('role') as string,
-      images: [],
-    };
-    createNotice(newNotice, files);
-  };
+  const { files, handleFileChange, handleSubmit } = useNotice(createNotice);
 
   return (
     <Card>
@@ -65,12 +51,7 @@ export function CreateNoticeCard({ createNotice }: CreateNoticeProps) {
 
           <div>
             <Label>첨부 이미지</Label>
-            <FileUpload
-              id="notice-image"
-              onChange={(file) => {
-                setFiles((prev) => (file ? [file, ...prev] : [...prev]));
-              }}
-            />
+            <FileUpload id="notice-image" onChange={handleFileChange} />
           </div>
 
           <Button className="w-full" type="submit">
