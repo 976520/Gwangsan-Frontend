@@ -1,4 +1,5 @@
-import { UpdateNoticeCard } from '@/features/notice/view/ui/UpdateNoticeCard
+import { UpdateNoticeCard } from '@/features/notice/view/ui/UpdateNoticeCard';
+
 interface UpdateNoticeViewProps {
   initialForm: FormValues | null;
   updateNotice: (changedForm: FormValues) => void;
