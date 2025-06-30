@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/card';
 import { ArrowLeft, Calendar, Eye, User } from 'lucide-react';
 import { Notice } from '@/entities/notice/model/types';
+import Image from 'next/image';
 
 interface NoticeDetailProps {
   notice: Notice;
@@ -51,11 +52,13 @@ export default function NoticeDetail({ notice, onBack }: NoticeDetailProps) {
         <div className="space-y-6">
           <div className="flex justify-center">
             {notice.images?.map((image) => (
-              <img
+              <Image
                 key={image}
                 src={image}
                 alt={notice.title}
-                className="max-h-[500px] rounded-lg object-contain"
+                width={800} // 예시 값, 상황에 맞게 조절
+                height={500} // 예시 값, 상황에 맞게 조절
+                className="h-auto max-h-[500px] w-auto rounded-lg object-contain"
               />
             ))}
           </div>
