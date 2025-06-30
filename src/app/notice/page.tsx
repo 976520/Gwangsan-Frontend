@@ -30,7 +30,7 @@ export default function Notice() {
   const { createNotice } = useCreateNotice(setNotices);
 
   return (
-    <div className="px-12 py-2">
+    <div className="space-y-7 px-12 py-2">
       <CreateNoticeCard createNotice={createNotice} />
       <NoticeCard notices={notices} deleteNotice={deleteNoticeInList} />
     </div>
