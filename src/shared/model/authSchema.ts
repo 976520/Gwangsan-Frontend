@@ -1,12 +1,20 @@
 import { z } from 'zod';
 
 export const SigninSchema = z.object({
-  phone: z.string(),
+  phoneNumber: z.string(),
   password: z.string().min(8, '비밀번호는 최소 8자리 이상이어야 합니다.'),
 });
 
 export const SignupSchema = SigninSchema.extend({
   verificationCode: z.string().length(6, '인증번호는 6자리여야 합니다.'),
+  nickname: z.string().regex(/^[가-힣]+$/, '닉네임은 한글만 입력 가능합니다.'),
+  placeId: z.number().int(),
+  dongId: z.number().int(),
+  specialties: z.string(),
+  name: z.string().min(1, '이름을 입력해주세요.'),
+  recommender: z
+    .string()
+    .regex(/^[가-힣]+$/, '추천인의 닉네임을 입력해주세요.'),
   confirmPassword: z
     .string()
     .min(8, '비밀번호 확인은 최소 8자리 이상이어야 합니다.'),
