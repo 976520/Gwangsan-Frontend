@@ -21,7 +21,12 @@ import {
 import { TableCell, TableRow } from '@/components/ui/table';
 import { Avatar, AvatarImage } from '@radix-ui/react-avatar';
 import { Clock, Edit, UserX } from 'lucide-react';
-import { MemberType, ROLE_TYPES, RoleTypeOptions } from '../model/memberType';
+import {
+  MemberType,
+  ROLE_TYPES,
+  RoleTypeOptions,
+  STATE_TYPES,
+} from '../model/memberType';
 import { getRoleBadgeColor, getStatusBadgeColor } from '../lib/handleColor';
 import { suspensionPeriodOptions } from '@/shared/model/Period';
 import {
@@ -35,6 +40,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
 } from '@/components/ui/alert-dialog';
+import { DialogClose } from '@radix-ui/react-dialog';
 
 interface MemberListProps {
   members: MemberType[];
@@ -61,7 +67,7 @@ export default function MemberList({ members }: MemberListProps) {
 
       <TableCell>
         <Badge className={getStatusBadgeColor(member.status)}>
-          {member.status}
+          {STATE_TYPES[member.status]}
         </Badge>
           
       </TableCell>
@@ -101,6 +107,12 @@ export default function MemberList({ members }: MemberListProps) {
                   </Select>
                 </div>
               </div>
+              <DialogFooter>
+                <DialogClose>
+                  <Button variant="outline">취소</Button>
+                </DialogClose>
+                <Button>저장</Button>
+              </DialogFooter>
             </DialogContent>
           </Dialog>
           {/* 회원 역할 수정 */}
@@ -137,7 +149,9 @@ export default function MemberList({ members }: MemberListProps) {
                 </div>
               </div>
               <DialogFooter>
-                <Button variant="outline">취소</Button>
+                <DialogClose>
+                  <Button variant="outline">취소</Button>
+                </DialogClose>
                 <Button>저장</Button>
               </DialogFooter>
             </DialogContent>
