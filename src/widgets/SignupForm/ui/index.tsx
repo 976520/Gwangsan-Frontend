@@ -33,41 +33,37 @@ export default function SignupForm() {
   return (
     <form action={action}>
       <CardContent className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="name">
-            이름 <span className="text-red-500">*</span>
-          </Label>
-          <div className="relative">
-            <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-            <Input
-              name="name"
-              placeholder="이름을 입력하세요"
-              className="pl-10"
-              disabled={Boolean(state.error && state.error.name)}
-              required
-            />
-            <small className="text-red-500">
-              {state.error && state.error.name}
-            </small>
-              
-          </div>
+        <Label htmlFor="name">
+          이름 <span className="text-red-500">*</span>
+        </Label>
+        <div className="relative">
+          <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+          <Input
+            name="name"
+            placeholder="이름을 입력하세요"
+            className="pl-10"
+            disabled={Boolean(state.error && state.error.name)}
+            required
+          />
+          <small className="text-red-500">
+            {state.error && state.error.name}
+          </small>
+            
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="nickname">
-            닉네임 (한글만) <span className="text-red-500">*</span>
-          </Label>
-          <div className="relative">
-            <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-            <Input
-              name="nickname"
-              placeholder="한글 닉네임을 입력하세요"
-              className="pl-10"
-              required
-            />
-            <small className="text-red-500">
-              {state.error && state.error.nickname}
-            </small>
-          </div>
+        <Label htmlFor="nickname">
+          닉네임 (한글만) <span className="text-red-500">*</span>
+        </Label>
+        <div className="relative">
+          <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+          <Input
+            name="nickname"
+            placeholder="한글 닉네임을 입력하세요"
+            className="pl-10"
+            required
+          />
+          <small className="text-red-500">
+            {state.error && state.error.nickname}
+          </small>
         </div>
         <div className="space-y-2">
           <Label htmlFor="phone">전화번호</Label>
