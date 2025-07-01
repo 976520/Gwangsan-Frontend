@@ -31,7 +31,7 @@ export const handleSignin = async (
     toast.success('로그인에 성공했습니다.');
     return { ...prevState, success: true, error: '' };
   } else {
-    toast.error(res.error);
+    toast.error(res.error || '로그인에 실패했습니다.');
     return {
       ...prevState,
       success: false,
