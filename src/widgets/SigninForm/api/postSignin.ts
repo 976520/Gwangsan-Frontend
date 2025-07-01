@@ -1,7 +1,6 @@
 import { instance } from '@/shared/lib/axios';
 import { SigninForm } from '@/shared/model/authSchema';
 import { AxiosError } from 'axios';
-import { toast } from 'sonner';
 
 export const postSignin = async (
   data: SigninForm,
