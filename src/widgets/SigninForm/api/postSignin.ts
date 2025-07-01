@@ -7,7 +7,7 @@ export const postSignin = async (
   data: SigninForm,
 ): Promise<{ success: boolean; error: string }> => {
   try {
-    await instance.post('/auth/signin', data);
+    await instance.post('/admin/signin', data);
     toast.success('로그인에 성공했습니다.');
     return { success: true, error: '' };
   } catch (e) {
