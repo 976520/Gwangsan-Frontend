@@ -1,23 +1,15 @@
 'use client';
 
-import { useForm, Controller } from 'react-hook-form';
-import { useNotice } from '../model/useNotice';
-import { Notice } from '@/entities/notice/model/types';
 import NoticeForm from './NoticeForm';
 import { Card, CardDescription, CardTitle } from '@/shared/ui/Card';
 import { CardHeader } from '@/components/ui/card';
 import { FormValues } from '../model/NoticeForm';
-import { Dispatch, SetStateAction } from 'react';
-import { useCreateNotice } from '../lib/useCreateNotice';
 
 interface CreateNoticeProps {
-  // createNotice: (data: FormValues) => void;
-  action: Dispatch<SetStateAction<Notice[]>>;
+  createNotice: (data: FormValues) => void;
 }
 
-export function CreateNoticeCard({ action }: CreateNoticeProps) {
-  const { createNotice } = useCreateNotice(action);
-
+export function CreateNoticeCard({ createNotice }: CreateNoticeProps) {
   return (
     <Card>
       <CardHeader>

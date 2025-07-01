@@ -1,6 +1,4 @@
 import { Controller, useForm } from 'react-hook-form';
-import { useNotice } from '../model/useNotice';
-import { Notice } from '@/entities/notice/model/types';
 import { CardContent } from '@/components/ui/card';
 import { Label } from '@radix-ui/react-label';
 import { Input } from '@/components/ui/input';
@@ -39,8 +37,6 @@ export default function NoticeForm({
     },
     [handleNotice, reset],
   );
-
-  const { files, handleFileChange } = useNotice(onSubmit);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -89,7 +85,7 @@ export default function NoticeForm({
 
         <div>
           <Label>첨부 이미지</Label>
-          <FileUpload id="notice-image" onChange={handleFileChange} />
+          <FileUpload id="images" {...register('images')} />
         </div>
 
         <Button className="w-full" type="submit">

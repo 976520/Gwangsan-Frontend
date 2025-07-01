@@ -1,13 +1,12 @@
 import { createNoticeForm } from '@/shared/api/createNoticeForm';
 import { type Notice } from '@/entities/notice/model/types';
 import { FormValues } from '../model/NoticeForm';
+import { useState, useCallback } from 'react';
 
-export const useCreateNotice = (
-  setNotices: React.Dispatch<React.SetStateAction<Notice[]>>,
-) => {
-  // const [notices, setNotices] = useState<Notice[]>([])
+export const useCreateNotice = () => {
+  const [notices, setNotices] = useState<Notice[]>([]);
 
-  const createNotice = (data: FormValues) => {
+  const createNotice = useCallback((data: FormValues) => {
     createNoticeForm(data);
 
     const newNotice: Notice = {
@@ -21,7 +20,7 @@ export const useCreateNotice = (
     };
 
     setNotices((prev) => [newNotice, ...prev]);
-  };
+  }, []);
 
-  return { createNotice };
+  return { createNotice, notices, setNotices };
 };

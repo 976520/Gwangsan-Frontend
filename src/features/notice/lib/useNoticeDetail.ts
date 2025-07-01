@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { type Notice } from '@/entities/notice/model/types';
-// import { fetchNoticeById } from '@/shared/api/fetchNoticeById';
 import { mockNotices } from '@/shared/mock/notices';
 
 export const useNoticeDetail = (id: string) => {

@@ -9,8 +9,9 @@ import { useEffect, useState } from 'react';
 import { deleteNotice } from '@/shared/api/deleteNotice';
 import { mockNotices } from '@/shared/mock/notices';
 import { useCreateNotice } from '@/features/notice/lib/useCreateNotice';
+
 export default function Notice() {
-  const [notices, setNotices] = useState<Notice[]>([]);
+  const { createNotice, notices, setNotices } = useCreateNotice();
 
   useEffect(() => {
     const getNotices = async () => {
@@ -21,7 +22,7 @@ export default function Notice() {
 
     // TODO 목데이터 나중에 지우기
     setNotices(mockNotices);
-  }, []);
+  }, [setNotices]);
 
   const deleteNoticeInList = (id: number) => {
     deleteNotice(id);
@@ -30,7 +31,7 @@ export default function Notice() {
 
   return (
     <div className="space-y-7 px-12 py-2">
-      <CreateNoticeCard action={setNotices} />
+      <CreateNoticeCard createNotice={createNotice} />
       <NoticeCard notices={notices} deleteNotice={deleteNoticeInList} />
     </div>
   );
