@@ -3,7 +3,7 @@ import { z } from 'zod';
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const ACCEPTED_MIME_TYPES = ['image/jpeg', 'image/png'];
 
-export const fileSchema = z
+export const FileSchema = z
   .instanceof(File)
   .refine((file) => file.size <= MAX_FILE_SIZE, {
     message: '파일 크기는 5MB 이하여야 합니다.',

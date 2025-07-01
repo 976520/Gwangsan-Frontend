@@ -9,6 +9,7 @@ import { RoleSelect } from '@/shared/ui/Select';
 import FileUpload from '@/shared/ui/FileUpload';
 import { Button } from '@/components/ui/button';
 import { FormValues } from '../model/NoticeForm';
+import { useCallback } from 'react';
 
 interface NoticeFormProps {
   handleNotice: (data: FormValues) => void;
@@ -31,10 +32,13 @@ export default function NoticeForm({
     },
   });
 
-  const onSubmit = (data: FormValues) => {
-    handleNotice(data);
-    reset();
-  };
+  const onSubmit = useCallback(
+    (data: FormValues) => {
+      handleNotice(data);
+      reset();
+    },
+    [handleNotice, reset],
+  );
 
   const { files, handleFileChange } = useNotice(onSubmit);
 
