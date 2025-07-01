@@ -4,29 +4,17 @@ import { fetchNoticeById } from '@/shared/api/fetchNoticeById';
 import { useState, useEffect, useCallback } from 'react';
 import type { Notice } from '@/entities/notice/model/types';
 import { UpdateNoticeCard } from '@/features/notice/ui/UpdateNoticeCard';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { mockNotices } from '@/shared/mock/notices';
 import { instance } from '@/shared/lib/axios';
 import { updateNoticeForm } from '@/shared/api/updateNoticeForm';
 import UpdateNoticeView from '@/views/updateNoticeView/ui';
 import { FormValues } from '@/features/notice/model/NoticeForm';
 
-export default function Update({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+export default function Update() {
   const router = useRouter();
+  const { id } = useParams<{ id: string }>();
   const [data, setData] = useState<FormValues | null>(null);
-  const [id, setId] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchId = async () => {
-      const { id } = await params;
-      setId(id);
-    };
-    fetchId();
-  }, [params]);
 
   useEffect(() => {
     const fetchNotice = async () => {
@@ -47,12 +35,10 @@ export default function Update({
 
   const updateNotice = useCallback(
     async (changedForm: FormValues) => {
-      if (id) {
-        // TODO 수정하는 코드 작성
-        const response = await updateNoticeForm(id, changedForm);
-        if (response.status == 200) {
-          router.push('/notice');
-        }
+      // TODO 수정하는 코드 작성
+      const response = await updateNoticeForm(id, changedForm);
+      if (response.status == 200) {
+        router.push('/notice');
       }
     },
     [id, router],

@@ -1,18 +1,11 @@
 'use client';
 
 import NoticeDetailCard from '@/features/notice/ui/NoticeDetailCard';
+import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-export default function Page({ params }: { params: Promise<{ id: string }> }) {
-  const [id, setId] = useState<string | null>(null);
+export default function Page() {
+  const { id } = useParams<{ id: string }>();
 
-  useEffect(() => {
-    const fetchId = async () => {
-      const { id } = await params;
-      setId(id);
-    };
-    fetchId();
-  }, [params]);
-
-  return <div>{id != null && <NoticeDetailCard id={id} />}</div>;
+  return <NoticeDetailCard id={id} />;
 }
