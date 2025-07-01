@@ -5,6 +5,8 @@ import { FormValues } from '../model/NoticeForm';
 export const useCreateNotice = (
   setNotices: React.Dispatch<React.SetStateAction<Notice[]>>,
 ) => {
+  // const [notices, setNotices] = useState<Notice[]>([])
+
   const createNotice = (data: FormValues) => {
     createNoticeForm(data);
 

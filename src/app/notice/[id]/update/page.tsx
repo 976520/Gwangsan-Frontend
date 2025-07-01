@@ -3,13 +3,13 @@
 import { fetchNoticeById } from '@/shared/api/fetchNoticeById';
 import { useState, useEffect, useCallback } from 'react';
 import type { Notice } from '@/entities/notice/model/types';
-import { UpdateNoticeCard } from '@/features/notice/view/ui/UpdateNoticeCard';
+import { UpdateNoticeCard } from '@/features/notice/ui/UpdateNoticeCard';
 import { useRouter } from 'next/navigation';
 import { mockNotices } from '@/shared/mock/notices';
 import { instance } from '@/shared/lib/axios';
 import { updateNoticeForm } from '@/shared/api/updateNoticeForm';
 import UpdateNoticeView from '@/views/updateNoticeView/ui';
-import { FormValues } from '@/features/notice/view/model/NoticeForm';
+import { FormValues } from '@/features/notice/model/NoticeForm';
 
 export default function Update({
   params,

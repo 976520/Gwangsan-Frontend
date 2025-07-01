@@ -1,5 +1,5 @@
-import { FormValues } from '@/features/notice/view/model/NoticeForm';
-import { UpdateNoticeCard } from '@/features/notice/view/ui/UpdateNoticeCard';
+import { FormValues } from '@/features/notice/model/NoticeForm';
+import { UpdateNoticeCard } from '@/features/notice/ui/UpdateNoticeCard';
 
 interface UpdateNoticeViewProps {
   initialForm: FormValues | null;

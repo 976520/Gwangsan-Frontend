@@ -1,4 +1,4 @@
-import { FormValues } from '@/features/notice/view/model/NoticeForm';
+import { FormValues } from '@/features/notice/model/NoticeForm';
 import { instance } from '../lib/axios';
 
 export const createNoticeForm = async (data: FormValues) => {

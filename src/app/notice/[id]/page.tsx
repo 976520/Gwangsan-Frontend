@@ -1,6 +1,6 @@
 'use client';
 
-import NoticeDetailCard from '@/features/notice/view/ui/NoticeDetailCard';
+import NoticeDetailCard from '@/features/notice/ui/NoticeDetailCard';
 import { useEffect, useState } from 'react';
 
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
