@@ -8,7 +8,6 @@ export const postSignin = async (
 ): Promise<{ success: boolean; error: string }> => {
   try {
     await instance.post('/admin/signin', data);
-    toast.success('로그인에 성공했습니다.');
     return { success: true, error: '' };
   } catch (e) {
     if (e instanceof AxiosError) {
