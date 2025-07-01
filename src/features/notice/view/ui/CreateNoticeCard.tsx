@@ -7,15 +7,16 @@ import NoticeForm from './NoticeForm';
 import { Card, CardDescription, CardTitle } from '@/shared/ui/Card';
 import { CardHeader } from '@/components/ui/card';
 import { FormValues } from '../model/NoticeForm';
+import { Dispatch, SetStateAction } from 'react';
+import { useCreateNotice } from '../lib/useCreateNotice';
 
 interface CreateNoticeProps {
-  createNotice: (data: FormValues) => void;
+  // createNotice: (data: FormValues) => void;
+  action: Dispatch<SetStateAction<Notice[]>>;
 }
 
-export function CreateNoticeCard({ createNotice }: CreateNoticeProps) {
-  const onSubmit = (data: FormValues) => {
-    createNotice(data);
-  };
+export function CreateNoticeCard({ action }: CreateNoticeProps) {
+  const { createNotice } = useCreateNotice(action);
 
   return (
     <Card>
@@ -25,7 +26,7 @@ export function CreateNoticeCard({ createNotice }: CreateNoticeProps) {
           새로운 공지사항을 작성하고 게시할 수 있습니다.
         </CardDescription>
       </CardHeader>
-      <NoticeForm handleNotice={onSubmit} />
+      <NoticeForm handleNotice={createNotice} />
     </Card>
   );
 }

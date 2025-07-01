@@ -27,11 +27,10 @@ export default function Notice() {
     deleteNotice(id);
     setNotices((prev) => notices.filter((notice) => notice.id != id));
   };
-  const { createNotice } = useCreateNotice(setNotices);
 
   return (
     <div className="space-y-7 px-12 py-2">
-      <CreateNoticeCard createNotice={createNotice} />
+      <CreateNoticeCard action={setNotices} />
       <NoticeCard notices={notices} deleteNotice={deleteNoticeInList} />
     </div>
   );
