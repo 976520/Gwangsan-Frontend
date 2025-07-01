@@ -6,8 +6,8 @@ import { CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Phone, Lock } from 'lucide-react';
-import { useFormState } from 'react-dom';
 import { handleSignin } from '../lib/handleSignin';
+import { useActionState } from 'react';
 
 const initialValue = {
   phoneNumber: '',
@@ -17,7 +17,7 @@ const initialValue = {
 };
 
 export default function SigninForm() {
-  const [state, action] = useFormState(handleSignin, initialValue);
+  const [state, action] = useActionState(handleSignin, initialValue);
   return (
     <form action={action}>
       <CardContent className="space-y-4">
