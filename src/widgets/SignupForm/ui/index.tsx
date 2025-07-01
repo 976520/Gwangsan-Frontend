@@ -71,6 +71,7 @@ export default function SignupForm() {
         </div>
         <div className="space-y-2">
           <Label htmlFor="phone">전화번호</Label>
+          <span className="text-red-500">*</span>
           <div className="flex space-x-2">
             <div className="relative flex-1">
               <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
@@ -152,6 +153,7 @@ export default function SignupForm() {
 
         <div className="space-y-2">
           <Label htmlFor="verificationCode">인증번호</Label>
+          <span className="text-red-500">*</span>
           <div className="flex space-x-2">
             <div className="relative flex-1">
               <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
@@ -173,6 +175,7 @@ export default function SignupForm() {
 
         <div className="space-y-2">
           <Label htmlFor="password">비밀번호</Label>
+          <span className="text-red-500">*</span>
           <div className="relative">
             <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
             <Input
@@ -192,6 +195,7 @@ export default function SignupForm() {
 
         <div className="space-y-2">
           <Label htmlFor="confirmPassword">비밀번호 확인</Label>
+          <span className="text-red-500">*</span>
           <div className="relative">
             <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
             <Input
