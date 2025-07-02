@@ -11,7 +11,7 @@ export const SignupSchema = SigninSchema.extend({
   nickname: z.string().regex(/^[가-힣]+$/, '닉네임은 한글만 입력 가능합니다.'),
   placeId: z.number().int(),
   dongId: z.number().int(),
-  specialties: z.string(),
+  specialties: z.string().array().min(1, '전문분야를 선택해주세요.'),
   name: z.string().min(1, '이름을 입력해주세요.'),
   recommender: z
     .string()

@@ -3,8 +3,10 @@ import { SignupForm } from '@/shared/model/authSchema';
 import { AxiosError } from 'axios';
 import { toast } from 'sonner';
 
+type SignupFormWithoutVerificationCode = Omit<SignupForm, 'verificationCode'>;
+
 export const postSignup = async (
-  data: SignupForm,
+  data: SignupFormWithoutVerificationCode,
 ): Promise<{ success: boolean; error: string }> => {
   try {
     await instance.post('/auth/signup', data);
