@@ -151,20 +151,18 @@ export default function SignupForm() {
             {state.error && state.error.placeId}
           </small>
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="recommender">
-            추천인 <span className="text-red-500">*</span>
-          </Label>
-          <Input
-            name="recommender"
-            type="text"
-            placeholder="추천인을 입력하세요"
-            required
-          />
-          <small className="text-red-500">
-            {state.error && state.error.recommender}
-          </small>
-        </div>
+        <Label htmlFor="recommender">
+          추천인 <span className="text-red-500">*</span>
+        </Label>
+        <Input
+          name="recommender"
+          type="text"
+          placeholder="추천인을 입력하세요"
+          required
+        />
+        <small className="text-red-500">
+          {state.error && state.error.recommender}
+        </small>
 
         <div className="space-y-2">
           <Label htmlFor="verificationCode">인증번호</Label>
