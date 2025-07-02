@@ -1,7 +1,8 @@
 import { z } from 'zod';
+import { phoneNumberSchema } from './phoneNumberSchema';
 
 export const SigninSchema = z.object({
-  phoneNumber: z.string(),
+  phoneNumber: phoneNumberSchema,
   password: z.string().min(8, '비밀번호는 최소 8자리 이상이어야 합니다.'),
 });
 
