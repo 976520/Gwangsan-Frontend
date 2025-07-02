@@ -111,7 +111,7 @@ export default function Specialty() {
               onClick={() => handleAdd(value.trim())}
             >
               <span className="font-medium text-blue-600">
-                "{value.trim()}"
+                &quot;{value.trim()}&quot;
               </span>{' '}
               새로 추가
             </div>
