@@ -14,9 +14,11 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { DONG_LIST, PLACE_LIST } from '../model/locationType';
-import { useActionState } from 'react';
+import { useActionState, useRef, useState } from 'react';
 import { handleSignup } from '../lib/handleSignup';
 import Specialty from '@/entities/signup/ui/Specialty';
+import { phoneNumberSchema } from '@/shared/model/phoneNumberSchema';
+import { toast } from 'sonner';
 
 const initialValue = {
   phoneNumber: '',
@@ -30,6 +32,21 @@ const initialValue = {
 
 export default function SignupForm() {
   const [state, action] = useActionState(handleSignup, initialValue);
+  const [codeSent, setCodeSent] = useState(false);
+  const phoneInputRef = useRef<HTMLInputElement>(null);
+  const VerificationRef = useRef<HTMLInputElement>(null);
+
+  const handleSendVerificationCode = () => {
+    const phoneNumber = phoneInputRef.current?.value || '';
+    const result = phoneNumberSchema.safeParse(phoneNumber);
+
+    if (!result.success) {
+      toast.error('올바른 형식으로 다시 입력해주세요');
+      return;
+    }
+
+    setCodeSent(true);
+  };
   return (
     <form action={action}>
       <CardContent className="space-y-4">
@@ -72,6 +89,7 @@ export default function SignupForm() {
             <div className="relative flex-1">
               <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
               <Input
+                ref={phoneInputRef}
                 name="phoneNumber"
                 type="tel"
                 placeholder="010-1234-5678"
@@ -84,11 +102,11 @@ export default function SignupForm() {
               </small>
             </div>
             <Button
-              type="button"
-              variant="outline"
+              onClick={handleSendVerificationCode}
               className="whitespace-nowrap"
+              disabled={codeSent}
             >
-              인증번호
+              {codeSent ? '전송 됨' : '인증번호'}
             </Button>
           </div>
         </div>
@@ -127,6 +145,7 @@ export default function SignupForm() {
                 </SelectItem>
               ))}
             </SelectContent>
+              
           </Select>
           <small className="text-red-500">
             {state.error && state.error.placeId}
@@ -154,6 +173,7 @@ export default function SignupForm() {
             <div className="relative flex-1">
               <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
               <Input
+                ref={VerificationRef}
                 name="verificationCode"
                 placeholder="6자리 인증번호"
                 className="pl-10"
@@ -165,7 +185,9 @@ export default function SignupForm() {
                 {state.error && state.error.verificationCode}
               </small>
             </div>
-            <Button type="button">확인</Button>
+            <Button type="button" className="whitespace-nowrap">
+              확인
+            </Button>
           </div>
         </div>
 
