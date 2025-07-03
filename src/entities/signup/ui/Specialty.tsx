@@ -6,11 +6,6 @@ import React, { useCallback, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { useGetSpecialty } from '../model/useGetSpecialty';
 
-interface Specialty {
-  keyword: number;
-  name: string;
-}
-
 export default function Specialty() {
   const [showSpecialtiesDropdown, setShowSpecialtiesDropdown] =
     useState<boolean>();
