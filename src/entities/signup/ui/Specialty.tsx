@@ -13,6 +13,11 @@ export default function Specialty() {
   const [selectedSpecialties, setSelectedSpecialties] = useState<string[]>([]);
   const { data } = useGetSpecialty();
 
+  const filtered =
+    data?.filter(
+      (v) => v.name.includes(value) && !selectedSpecialties.includes(v.name),
+    ) ?? [];
+
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   }, []);
@@ -87,19 +92,15 @@ export default function Specialty() {
 
       {showSpecialtiesDropdown && (
         <div className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-300 bg-white shadow-lg">
-          {data &&
-          data.length > 0 &&
-          data.filter((v) => v.name.includes(value)).length > 0 ? (
-            data
-              .filter((v) => v.name.includes(value))
-              .map((specialty, index) => (
-                <div
-                  key={index}
-                  className="cursor-pointer border-b border-gray-100 px-4 py-2 last:border-b-0 hover:bg-gray-100"
-                >
-                  {specialty.name}
-                </div>
-              ))
+          {filtered.length > 0 ? (
+            filtered.map((specialty, index) => (
+              <div
+                key={index}
+                className="cursor-pointer border-b border-gray-100 px-4 py-2 last:border-b-0 hover:bg-gray-100"
+              >
+                {specialty.name}
+              </div>
+            ))
           ) : value.trim() ? (
             <div
               className="cursor-pointer bg-blue-50 px-4 py-2 text-gray-500 hover:bg-blue-100"
