@@ -1,6 +1,5 @@
 import { instance } from '@/shared/lib/axios';
 import { toast } from 'sonner';
-import { Specialty } from '../model/useGetSpecialty';
 
 export const getSpecialty = async (): Promise<Specialty[]> => {
   try {
