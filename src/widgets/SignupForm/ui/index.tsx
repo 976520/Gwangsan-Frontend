@@ -117,7 +117,7 @@ export default function SignupForm() {
           <Label htmlFor="dongId">
             동 선택 <span className="text-red-500">*</span>
           </Label>
-          <Select>
+          <Select name="dongId">
             <SelectTrigger id="dongId">
               <SelectValue placeholder="동을 선택하세요" />
             </SelectTrigger>
@@ -137,7 +137,7 @@ export default function SignupForm() {
           <Label htmlFor="placeId">
             지점 <span className="text-red-500">*</span>
           </Label>
-          <Select>
+          <Select name="placeId">
             <SelectTrigger id="placeId">
               <SelectValue placeholder="지점을 선택하세요" />
             </SelectTrigger>
