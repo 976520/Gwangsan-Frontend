@@ -10,7 +10,7 @@ export const useCreateNotice = (
   setNotices: Dispatch<SetStateAction<Notice[]>>,
 ) => {
   const createNotice = useCallback((data: FormValues) => {
-    createNoticeForm(data);
+    // createNoticeForm(data);
   }, []);
 
   return { createNotice };

@@ -8,6 +8,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { deleteNotice } from '@/shared/api/deleteNotice';
 import { FormValues } from '@/features/notice/model/NoticeForm';
 import { createNoticeForm } from '@/shared/api/createNoticeForm';
+import { uploadImages } from '@/shared/api/uploadImage';
 
 export default function Notice() {
   const [notices, setNotices] = useState<Notice[]>([]);
@@ -17,8 +18,17 @@ export default function Notice() {
   }, []);
 
   const createNotice = useCallback((data: FormValues) => {
-    createNoticeForm(data);
-    refreshNotices();
+    const handleNoticeSubmit = async () => {
+      const images = await uploadImages(data.images);
+      const imageIds = images.map((image) => {
+        return image.imageId;
+      });
+
+      createNoticeForm(data, imageIds);
+      refreshNotices();
+    };
+
+    handleNoticeSubmit();
   }, []);
 
   const refreshNotices = async () => {

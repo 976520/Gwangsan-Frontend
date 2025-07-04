@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/Card';
 import { BadgeSelect } from '@/shared/ui/BadgeSelect';
 import { Notice } from '@/entities/notice/model/types';
 import { useRouter } from 'next/navigation';
+import dayjs from 'dayjs';
 
 interface NoticeListProps {
   notices: Notice[];
@@ -38,10 +39,10 @@ export default function NoticeCard({ notices, deleteNotice }: NoticeListProps) {
                   </h3>
                   <p className="mt-1 text-gray-600">{notice.content}</p>
                   <div className="mt-3 flex items-center space-x-4 text-sm text-gray-500">
-                    <span>작성자: {notice.author}</span>
                     <BadgeSelect role={notice.role} />
-                    <span>{notice.date}</span>
-                    <span>조회수: {notice.views}</span>
+                    <span>
+                      {dayjs(notice.createdAt).format('YYYY년 MM월 DD일')}
+                    </span>
                   </div>
                 </div>
                 <div className="flex items-center space-x-2">
