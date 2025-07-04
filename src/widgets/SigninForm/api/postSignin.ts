@@ -1,12 +1,17 @@
 import { instance } from '@/shared/lib/axios';
 import { SigninForm } from '@/shared/model/authSchema';
 import { AxiosError } from 'axios';
+import { setCookie } from 'cookies-next';
 
 export const postSignin = async (
   data: SigninForm,
 ): Promise<{ success: boolean; error: string }> => {
   try {
-    await instance.post('/admin/signin', data);
+    const res = await instance.post('/admin/signin', data);
+    setCookie('accessToken', res.data.accessToken, { maxAge: 60 * 60 * 24 });
+    setCookie('refreshToken', res.data.refreshToken, {
+      maxAge: 60 * 60 * 24 * 7,
+    });
     return { success: true, error: '' };
   } catch (e) {
     if (e instanceof AxiosError) {
