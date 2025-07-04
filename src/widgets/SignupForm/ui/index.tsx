@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { DONG_LIST, PLACE_LIST } from '../model/locationType';
+import { DONG_LIST, PLACE_LIST } from '../model/locations';
 import { useActionState, useRef, useState } from 'react';
 import { handleSignup } from '../lib/handleSignup';
 import Specialty from '@/entities/signup/ui/Specialty';
@@ -92,9 +92,9 @@ export default function SignupForm() {
                 ref={phoneInputRef}
                 name="phoneNumber"
                 type="tel"
-                placeholder="010-1234-5678"
+                placeholder="01012345678"
                 className="pl-10"
-                maxLength={13}
+                maxLength={11}
                 required
               />
               <small className="text-red-500">
