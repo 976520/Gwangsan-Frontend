@@ -26,6 +26,7 @@ export default function SigninForm() {
           <div className="relative">
             <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
             <Input
+              id="phone"
               name="phoneNumber"
               type="tel"
               placeholder="010-1234-5678"
@@ -42,6 +43,7 @@ export default function SigninForm() {
           <div className="relative">
             <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
             <Input
+              id="password"
               name="password"
               type="password"
               placeholder="비밀번호를 입력하세요"

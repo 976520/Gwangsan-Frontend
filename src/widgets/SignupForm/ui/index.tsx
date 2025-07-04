@@ -56,6 +56,7 @@ export default function SignupForm() {
         <div className="relative">
           <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
           <Input
+            id="name"
             name="name"
             placeholder="이름을 입력하세요"
             className="pl-10"
@@ -73,6 +74,7 @@ export default function SignupForm() {
         <div className="relative">
           <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
           <Input
+            id="nickname"
             name="nickname"
             placeholder="한글 닉네임을 입력하세요"
             className="pl-10"
@@ -90,6 +92,7 @@ export default function SignupForm() {
               <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
               <Input
                 ref={phoneInputRef}
+                id="phone"
                 name="phoneNumber"
                 type="tel"
                 placeholder="01012345678"
@@ -115,7 +118,7 @@ export default function SignupForm() {
             동 선택 <span className="text-red-500">*</span>
           </Label>
           <Select>
-            <SelectTrigger>
+            <SelectTrigger id="dongId">
               <SelectValue placeholder="동을 선택하세요" />
             </SelectTrigger>
             <SelectContent>
@@ -135,7 +138,7 @@ export default function SignupForm() {
             지점 <span className="text-red-500">*</span>
           </Label>
           <Select>
-            <SelectTrigger>
+            <SelectTrigger id="placeId">
               <SelectValue placeholder="지점을 선택하세요" />
             </SelectTrigger>
             <SelectContent>
@@ -155,6 +158,7 @@ export default function SignupForm() {
           추천인 <span className="text-red-500">*</span>
         </Label>
         <Input
+          id="recommender"
           name="recommender"
           type="text"
           placeholder="추천인을 입력하세요"
@@ -172,6 +176,7 @@ export default function SignupForm() {
               <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
               <Input
                 ref={VerificationRef}
+                id="verificationCode"
                 name="verificationCode"
                 placeholder="6자리 인증번호"
                 className="pl-10"
@@ -195,6 +200,7 @@ export default function SignupForm() {
           <div className="relative">
             <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
             <Input
+              id="password"
               name="password"
               placeholder="비밀번호를 입력하세요 (8자 이상)"
               className="pl-10 pr-10"
@@ -215,6 +221,7 @@ export default function SignupForm() {
           <div className="relative">
             <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
             <Input
+              id="confirmPassword"
               name="confirmPassword"
               minLength={8}
               placeholder="비밀번호를 다시 입력하세요"
