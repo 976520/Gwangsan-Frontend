@@ -85,23 +85,7 @@ export default function NoticeForm({
 
         <div>
           <Label>첨부 이미지</Label>
-          <Controller
-            name="images"
-            control={control}
-            rules={{ required: '이미지를 하나 이상 업로드해주세요.' }}
-            render={({ field }) => (
-              <FileUpload
-                id="images"
-                name="images"
-                onChange={field.onChange}
-                onBlur={field.onBlur}
-                value={field.value}
-              />
-            )}
-          />
-          {errors.images && (
-            <p className="text-sm text-red-500">{errors.images.message}</p>
-          )}
+          <FileUpload id="images" {...register('images')} />
         </div>
 
         <Button className="w-full" type="submit">

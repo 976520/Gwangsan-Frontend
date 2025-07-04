@@ -28,6 +28,6 @@ export const uploadImages = async (
     return responses;
   } catch (error) {
     toast.error(`${error}`);
-    return []; // 실패 시 빈 배열 반환 (선택사항)
+    throw new Error(`${error}`);
   }
 };
