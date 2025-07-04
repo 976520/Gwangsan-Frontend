@@ -88,10 +88,14 @@ export default function Specialty() {
         onChange={handleChange}
         onFocus={() => setShowSpecialtiesDropdown(true)}
         onKeyDown={handleKeyDown}
+        onBlur={() => setTimeout(() => setShowSpecialtiesDropdown(false), 100)}
       />
 
       {showSpecialtiesDropdown && (
-        <div className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-300 bg-white shadow-lg">
+        <div
+          className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-300 bg-white shadow-lg"
+          onMouseDownCapture={(e) => e.stopPropagation()}
+        >
           {filtered.length > 0 ? (
             filtered.map((specialty, index) => (
               <div
