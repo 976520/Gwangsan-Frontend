@@ -5,6 +5,5 @@ export interface Notice {
   role: string;
   author: string;
   date: string;
-  views: number;
   images?: string[];
 }

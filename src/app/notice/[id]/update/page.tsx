@@ -2,11 +2,7 @@
 
 import { fetchNoticeById } from '@/shared/api/fetchNoticeById';
 import { useState, useEffect, useCallback } from 'react';
-import type { Notice } from '@/entities/notice/model/types';
-import { UpdateNoticeCard } from '@/features/notice/ui/UpdateNoticeCard';
 import { useParams, useRouter } from 'next/navigation';
-import { mockNotices } from '@/shared/mock/notices';
-import { instance } from '@/shared/lib/axios';
 import { updateNoticeForm } from '@/shared/api/updateNoticeForm';
 import UpdateNoticeView from '@/views/updateNoticeView/ui';
 import { FormValues } from '@/features/notice/model/NoticeForm';
@@ -18,17 +14,13 @@ export default function Update() {
 
   useEffect(() => {
     const fetchNotice = async () => {
-      // const data = await fetchNoticeById(id);
-      // setNotice(data);
-      const mock = mockNotices.find((p) => p.id.toString() == id);
-      const data: FormValues = {
-        title: mock?.title ?? '',
-        content: mock?.content ?? '',
-        role: mock?.role ?? '',
+      const data = await fetchNoticeById(id);
+      setData({
+        title: data?.title ?? '',
+        content: data?.content ?? '',
+        role: data?.role ?? '',
         images: [],
-      };
-
-      mock && setData(data);
+      });
     };
     fetchNotice();
   }, [id]);
