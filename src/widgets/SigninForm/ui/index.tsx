@@ -49,10 +49,6 @@ export default function SigninForm() {
               required
             />
             {state?.error && <small>{state.error.password}</small>}
-            <button
-              type="button"
-              className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
-            ></button>
           </div>
         </div>
       </CardContent>
