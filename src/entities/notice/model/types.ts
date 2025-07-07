@@ -8,12 +8,7 @@ export interface Notice {
   images?: Image[];
 }
 
-interface Image {
-  imageId: number;
-  imageUrl: string;
-}
-
-export interface UploadImageResponse {
+export interface Image {
   imageId: number;
   imageUrl: string;
 }
