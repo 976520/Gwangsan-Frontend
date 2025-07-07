@@ -12,6 +12,9 @@ export const SignupSchema = SigninSchema.extend({
   placeId: z.number().int(),
   dongId: z.number().int(),
   specialties: z.string().array().min(1, '전문분야를 선택해주세요.'),
+  description: z
+    .string()
+    .max(100, '자기소개는 최대 100자까지 입력 가능합니다.'),
   name: z.string().min(1, '이름을 입력해주세요.'),
   recommender: z
     .string()

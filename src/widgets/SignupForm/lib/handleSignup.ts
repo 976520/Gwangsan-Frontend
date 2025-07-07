@@ -24,6 +24,7 @@ export const handleSignup = async (
     name: formData.get('name') as string,
     recommender: formData.get('recommender') as string,
     confirmPassword: formData.get('confirmPassword') as string,
+    description: formData.get('description') as string,
   };
 
   const result = SignupSchema.safeParse(value);

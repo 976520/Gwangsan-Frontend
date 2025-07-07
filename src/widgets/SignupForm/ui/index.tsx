@@ -27,6 +27,7 @@ const initialValue = {
   verificationCode: '',
   nickname: '',
   placeId: '',
+  description: '',
   error: '' as '' | SignupError,
 };
 
@@ -235,6 +236,22 @@ export default function SignupForm() {
           </div>
         </div>
 
+        <div className="space-y-2">
+          <Label htmlFor="description">자기소개</Label>
+          <div className="relative">
+            <Input
+              id="description"
+              name="description"
+              placeholder="자기소개를 입력하세요"
+              className="pl-4"
+              required
+              multiple
+            />
+            <small className="text-red-500">
+              {state.error && state.error.description}
+            </small>
+          </div>
+        </div>
         <Specialty />
       </CardContent>
 

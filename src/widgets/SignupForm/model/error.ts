@@ -9,4 +9,5 @@ interface SignupError {
   name?: string[];
   recommender?: string[];
   confirmPassword?: string[];
+  description?: string[];
 }
