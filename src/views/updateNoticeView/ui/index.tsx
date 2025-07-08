@@ -2,7 +2,7 @@ import { FormValues } from '@/features/notice/model/NoticeForm';
 import { UpdateNoticeCard } from '@/features/notice/ui/UpdateNoticeCard';
 
 interface UpdateNoticeViewProps {
-  initialForm: FormValues | null;
+  initialForm: FormValues | undefined;
   updateNotice: (changedForm: FormValues) => void;
 }
 

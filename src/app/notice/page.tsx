@@ -3,48 +3,22 @@
 import { type Notice } from '@/entities/notice/model/types';
 import { CreateNoticeCard } from '@/features/notice/ui/CreateNoticeCard';
 import NoticeCard from '@/features/notice/ui/NoticeCard';
-import { fetchNotices } from '@/shared/api/fetchNotices';
-import { useCallback, useEffect, useState } from 'react';
-import { deleteNotice } from '@/shared/api/deleteNotice';
-import { FormValues } from '@/features/notice/model/NoticeForm';
-import { createNoticeForm } from '@/shared/api/createNoticeForm';
-import { uploadImages } from '@/shared/api/uploadImage';
+import { useEffect, useState } from 'react';
+import { useNotice } from '@/features/notice/lib/useNotice';
 
 export default function Notice() {
   const [notices, setNotices] = useState<Notice[]>([]);
+  const { createNotice, refreshNotices, deleteNoticeById } =
+    useNotice(setNotices);
 
   useEffect(() => {
     refreshNotices();
   }, []);
 
-  const createNotice = useCallback((data: FormValues) => {
-    const handleNoticeSubmit = async () => {
-      const images = await uploadImages(data.images);
-      const imageIds = images.map((image) => {
-        return image.imageId;
-      });
-
-      createNoticeForm(data, imageIds);
-      refreshNotices();
-    };
-
-    handleNoticeSubmit();
-  }, []);
-
-  const refreshNotices = async () => {
-    const newNotices = await fetchNotices();
-    setNotices(newNotices);
-  };
-
-  const deleteNoticeInList = (id: number) => {
-    deleteNotice(id);
-    setNotices((prev) => prev.filter((notice) => notice.id != id));
-  };
-
   return (
     <div className="space-y-7 px-12 py-2">
       <CreateNoticeCard createNotice={createNotice} />
-      <NoticeCard notices={notices} deleteNotice={deleteNoticeInList} />
+      <NoticeCard notices={notices} deleteNotice={deleteNoticeById} />
     </div>
   );
 }
