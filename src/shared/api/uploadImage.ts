@@ -7,7 +7,7 @@ export const uploadImages = async (files: File[]): Promise<Image[]> => {
     const responses = await Promise.all(
       files.map(async (file) => {
         const { data } = await instance.postForm(
-          `/api/image`,
+          `/image`,
           { file },
           {
             headers: {
@@ -26,6 +26,6 @@ export const uploadImages = async (files: File[]): Promise<Image[]> => {
     return responses;
   } catch (error) {
     toast.error(`${error}`);
-    throw new Error(`${error}`);
+    return [];
   }
 };

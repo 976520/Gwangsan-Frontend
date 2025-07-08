@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 
 export const fetchNotices = async (): Promise<Notice[]> => {
   try {
-    const { data } = await instance.get('/api/post');
+    const { data } = await instance.get('/post');
     return data;
   } catch (error) {
     toast.error(`${error}`);

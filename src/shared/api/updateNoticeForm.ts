@@ -5,7 +5,7 @@ export const updateNoticeForm = async (
   id: string,
   changedForm: Partial<FormValues>,
 ) => {
-  const response = await instance.patch(`/api/post/${id}`, changedForm, {
+  const response = await instance.patch(`/post/${id}`, changedForm, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

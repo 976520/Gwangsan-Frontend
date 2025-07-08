@@ -7,7 +7,7 @@ export const createNoticeForm = async (
   imageIds: number[],
 ) => {
   try {
-    await instance.post(`/api/post`, {
+    await instance.post(`/post`, {
       title: data.title,
       content: data.content,
       placeName: data.role,
