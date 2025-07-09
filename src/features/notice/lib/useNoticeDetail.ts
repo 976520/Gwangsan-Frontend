@@ -9,7 +9,6 @@ export const useNoticeDetail = (id: string) => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        // 실제 API 통신은 생략하고, mock 데이터로 대체
         const data = await fetchNoticeById(id);
         setNotice(data);
       } catch (e) {

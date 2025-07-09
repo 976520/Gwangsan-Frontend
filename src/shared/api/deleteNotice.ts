@@ -1,10 +1,5 @@
 import { instance } from '../lib/axios';
-import { toast } from 'sonner';
 
 export const deleteNotice = async (id: number) => {
-  try {
-    await instance.delete(`/post/${id.toString()}`);
-  } catch (error) {
-    toast.error(`${error}`);
-  }
+  await instance.delete(`/post/${id.toString()}`);
 };

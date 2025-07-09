@@ -1,6 +1,5 @@
 import { Image } from '@/entities/notice/model/types';
 import { instance } from '../lib/axios';
-import { toast } from 'sonner';
 
 export const uploadImages = async (files: File[]): Promise<Image[]> => {
   try {
@@ -24,8 +23,7 @@ export const uploadImages = async (files: File[]): Promise<Image[]> => {
     );
 
     return responses;
-  } catch (error) {
-    toast.error(`${error}`);
-    return [];
+  } catch (e) {
+    throw e;
   }
 };
