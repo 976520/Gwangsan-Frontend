@@ -8,16 +8,16 @@ import { useNotice } from '@/features/notice/lib/useNotice';
 
 export default function Notice() {
   const [notices, setNotices] = useState<Notice[]>([]);
-  const { createNotice, refreshNotices, deleteNoticeById } =
+  const { wrappedCreateNotice, refreshNotices, deleteNoticeById } =
     useNotice(setNotices);
 
   useEffect(() => {
     refreshNotices();
-  }, []);
+  }, [refreshNotices]);
 
   return (
     <div className="space-y-7 px-12 py-2">
-      <CreateNoticeCard createNotice={createNotice} />
+      <CreateNoticeCard createNotice={wrappedCreateNotice} />
       <NoticeCard notices={notices} deleteNotice={deleteNoticeById} />
     </div>
   );

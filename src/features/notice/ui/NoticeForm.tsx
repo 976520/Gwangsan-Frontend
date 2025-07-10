@@ -84,6 +84,22 @@ export default function NoticeForm({
         </div>
 
         <div>
+          <Label>대상 장소</Label>
+          <Controller
+            name="placeName"
+            control={control}
+            defaultValue={initialNotice?.role}
+            rules={{ required: '대상 장소는 필수입니다.' }}
+            render={({ field }) => (
+              <RoleSelect value={field.value} onChange={field.onChange} />
+            )}
+          />
+          {errors.role && (
+            <p className="text-sm text-red-500">{errors.role.message}</p>
+          )}
+        </div>
+
+        <div>
           <Label>첨부 이미지</Label>
           <FileUpload id="images" {...register('images')} />
         </div>

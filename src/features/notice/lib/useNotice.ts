@@ -1,4 +1,4 @@
-import { createNoticeForm } from '@/shared/api/createNoticeForm';
+import { createNotice } from '@/shared/api/createNotice';
 import { type Notice } from '@/entities/notice/model/types';
 import { FormValues } from '../model/NoticeForm';
 import { useCallback, Dispatch, SetStateAction } from 'react';
@@ -18,14 +18,12 @@ export const useNotice = (setNotices: Dispatch<SetStateAction<Notice[]>>) => {
     }
   }, [setNotices]);
 
-  const createNotice = useCallback(
+  const wrappedCreateNotice = useCallback(
     async (data: FormValues) => {
       try {
         const images = await uploadImages(data.images);
-        const imageIds = images.map((image) => {
-          return image.imageId;
-        });
-        await createNoticeForm(data, imageIds);
+        const imageIds = images.map((image) => image.imageId);
+        await createNotice(data, imageIds);
         await refreshNotices();
         toast.success('성공');
       } catch (e) {
@@ -48,5 +46,5 @@ export const useNotice = (setNotices: Dispatch<SetStateAction<Notice[]>>) => {
     [refreshNotices],
   );
 
-  return { createNotice, refreshNotices, deleteNoticeById };
+  return { wrappedCreateNotice, refreshNotices, deleteNoticeById };
 };

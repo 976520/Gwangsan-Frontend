@@ -13,20 +13,20 @@ export default function Update() {
   const { id } = useParams<{ id: string }>();
 
   const { isPending, error, data } = useQuery({
-    queryKey: ['noticeData'],
+    queryKey: ['noticeData', id],
     queryFn: async () => {
       const {
         title = '',
         content = '',
         role = '',
+        placeName = '',
       } = (await fetchNoticeById(id)) || {};
-      return { title, content, role, images: [] };
+      return { title, content, role, images: [], placeName };
     },
   });
 
   const updateNotice = useCallback(
     async (changedForm: FormValues) => {
-      // TODO 수정하는 코드 작성
       const response = await updateNoticeForm(id, changedForm);
       if (response.status == 200) {
         router.push('/notice');
@@ -35,13 +35,5 @@ export default function Update() {
     [id, router],
   );
 
-  const onBack = () => {
-    router.push('/notice');
-  };
-
-  return (
-    !isPending && (
-      <UpdateNoticeView updateNotice={updateNotice} initialForm={data} />
-    )
-  );
+  return <UpdateNoticeView updateNotice={updateNotice} initialForm={data} />;
 }
