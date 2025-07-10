@@ -3,7 +3,8 @@ import { CardContent } from '@/components/ui/card';
 import { Label } from '@radix-ui/react-label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { RoleSelect } from '@/shared/ui/Select';
+import { RoleSelect } from '@/shared/ui/RoleSelect';
+import { PlaceSelect } from '@/shared/ui/PlaceSelect';
 import FileUpload from '@/shared/ui/FileUpload';
 import { Button } from '@/components/ui/button';
 import { FormValues } from '../model/NoticeForm';
@@ -84,18 +85,18 @@ export default function NoticeForm({
         </div>
 
         <div>
-          <Label>대상 장소</Label>
+          <Label>지역</Label>
           <Controller
             name="placeName"
             control={control}
             defaultValue={initialNotice?.role}
-            rules={{ required: '대상 장소는 필수입니다.' }}
+            rules={{ required: '대상 구역은 필수입니다.' }}
             render={({ field }) => (
-              <RoleSelect value={field.value} onChange={field.onChange} />
+              <PlaceSelect value={field.value} onChange={field.onChange} />
             )}
           />
-          {errors.role && (
-            <p className="text-sm text-red-500">{errors.role.message}</p>
+          {errors.placeName && (
+            <p className="text-sm text-red-500">{errors.placeName.message}</p>
           )}
         </div>
 

@@ -46,5 +46,9 @@ export const useNotice = (setNotices: Dispatch<SetStateAction<Notice[]>>) => {
     [refreshNotices],
   );
 
-  return { wrappedCreateNotice, refreshNotices, deleteNoticeById };
+  return {
+    createNotice: wrappedCreateNotice,
+    refreshNotices,
+    deleteNoticeById,
+  };
 };
