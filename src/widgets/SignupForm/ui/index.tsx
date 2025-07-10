@@ -19,6 +19,7 @@ import { handleSignup } from '../lib/handleSignup';
 import Specialty from '@/entities/signup/ui/Specialty';
 import { phoneNumberSchema } from '@/shared/model/phoneNumberSchema';
 import { toast } from 'sonner';
+import { postPhoneNumber } from '../api/postPhoneNumber';
 
 const initialValue = {
   phoneNumber: '',
@@ -44,9 +45,10 @@ export default function SignupForm() {
     if (!result.success) {
       toast.error('올바른 형식으로 다시 입력해주세요');
       return;
+    } else {
+      postPhoneNumber(phoneNumber);
+      setCodeSent(true);
     }
-
-    setCodeSent(true);
   };
   return (
     <form action={action}>
