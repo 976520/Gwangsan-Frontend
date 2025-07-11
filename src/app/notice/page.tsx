@@ -5,7 +5,6 @@ import { CreateNoticeCard } from '@/features/notice/ui/CreateNoticeCard';
 import NoticeCard from '@/features/notice/ui/NoticeCard';
 import { useEffect, useState } from 'react';
 import { useNotice } from '@/features/notice/lib/useNotice';
-import { mockData } from '@/shared/mock/notices';
 
 export default function Notice() {
   const [notices, setNotices] = useState<Notice[]>([]);
@@ -19,8 +18,8 @@ export default function Notice() {
  */
 
   useEffect(() => {
-    setNotices(mockData);
-  }, []);
+    refreshNotices();
+  }, [refreshNotices]);
 
   return (
     <div className="space-y-7 px-12 py-2">

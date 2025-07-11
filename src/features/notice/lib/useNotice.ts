@@ -40,7 +40,6 @@ export const useNotice = (setNotices?: Dispatch<SetStateAction<Notice[]>>) => {
         };
 
         setNotices?.((prev) => [newNotice, ...prev]);
-
         toast.success('성공');
       } catch (e) {
         toast.error('공지사항 등록 실패');
