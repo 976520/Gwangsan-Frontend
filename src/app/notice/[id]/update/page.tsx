@@ -1,39 +1,21 @@
 'use client';
 
-import { fetchNoticeById } from '@/shared/api/fetchNoticeById';
-import { useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { updateNoticeForm } from '@/shared/api/updateNoticeForm';
 import UpdateNoticeView from '@/views/updateNoticeView/ui';
+import { useNotice } from '@/features/notice/lib/useNotice';
+import { useNoticeDetailQuery } from '@/features/notice/lib/useNoticeDetailQuery';
 import { FormValues } from '@/features/notice/model/NoticeForm';
-import { useQuery } from '@tanstack/react-query';
 
 export default function Update() {
   const router = useRouter();
   const { id } = useParams<{ id: string }>();
+  const { updateNotice } = useNotice();
+  const { data, isPending } = useNoticeDetailQuery(id);
 
-  const { isPending, error, data } = useQuery({
-    queryKey: ['noticeData', id],
-    queryFn: async () => {
-      const {
-        title = '',
-        content = '',
-        role = '',
-        placeName = '',
-      } = (await fetchNoticeById(id)) || {};
-      return { title, content, role, images: [], placeName };
-    },
-  });
+  const onSubmit = async (data: FormValues) => {
+    await updateNotice(id, data);
+    router.push('/notice');
+  };
 
-  const updateNotice = useCallback(
-    async (changedForm: FormValues) => {
-      const response = await updateNoticeForm(id, changedForm);
-      if (response.status == 200) {
-        router.push('/notice');
-      }
-    },
-    [id, router],
-  );
-
-  return <UpdateNoticeView updateNotice={updateNotice} initialForm={data} />;
+  return <UpdateNoticeView updateNotice={onSubmit} initialForm={data} />;
 }

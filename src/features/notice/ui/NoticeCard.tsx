@@ -5,7 +5,7 @@ import { BadgeSelect } from '@/shared/ui/BadgeSelect';
 import { Notice } from '@/entities/notice/model/types';
 import { useRouter } from 'next/navigation';
 import dayjs from 'dayjs';
-
+import { Badge } from '@/components/ui/badge';
 interface NoticeListProps {
   notices: Notice[];
   deleteNotice: (id: number) => void;
@@ -40,6 +40,7 @@ export default function NoticeCard({ notices, deleteNotice }: NoticeListProps) {
                   <p className="mt-1 text-gray-600">{notice.content}</p>
                   <div className="mt-3 flex items-center space-x-4 text-sm text-gray-500">
                     <BadgeSelect role={notice.role} />
+                    <Badge variant="outline">{notice.placeName}</Badge>
                     <span>
                       {dayjs(notice.createdAt).format('YYYY년 MM월 DD일')}
                     </span>

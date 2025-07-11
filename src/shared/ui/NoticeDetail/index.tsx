@@ -13,7 +13,7 @@ import { ArrowLeft, Calendar } from 'lucide-react';
 import { Notice } from '@/entities/notice/model/types';
 import Image from 'next/image';
 import dayjs from 'dayjs';
-
+import { Badge } from '@/components/ui/badge';
 interface NoticeDetailProps {
   notice: Notice;
   onBack: () => void;
@@ -38,6 +38,7 @@ export default function NoticeDetail({ notice, onBack }: NoticeDetailProps) {
         <CardTitle className="text-3xl font-bold">{notice.title}</CardTitle>
         <div className="mt-3 flex flex-wrap items-center gap-3">
           <BadgeSelect role={notice.role}>{notice.role}</BadgeSelect>
+          <Badge variant="outline">{notice.placeName}</Badge>
         </div>
       </CardHeader>
 
