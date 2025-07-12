@@ -40,7 +40,7 @@ export default function NoticeCard({ notices, deleteNotice }: NoticeListProps) {
                   <p className="mt-1 text-gray-600">{notice.content}</p>
                   <div className="mt-3 flex items-center space-x-4 text-sm text-gray-500">
                     <BadgeSelect role={notice.role} />
-                    <Badge variant="outline">{notice.placeName}</Badge>
+                    <Badge variant="outline">{notice.place}</Badge>
                     <span>
                       {dayjs(notice.createdAt).format('YYYY년 MM월 DD일')}
                     </span>

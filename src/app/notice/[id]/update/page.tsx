@@ -9,13 +9,21 @@ import { FormValues } from '@/features/notice/model/NoticeForm';
 export default function Update() {
   const router = useRouter();
   const { id } = useParams<{ id: string }>();
-  const { updateNotice } = useNotice();
   const { data, isPending } = useNoticeDetailQuery(id);
+  const { updateNotice } = useNotice();
 
   const onSubmit = async (data: FormValues) => {
     await updateNotice(id, data);
     router.push('/notice');
   };
 
-  return <UpdateNoticeView updateNotice={onSubmit} initialForm={data} />;
+  return (
+    <UpdateNoticeView
+      updateNotice={onSubmit}
+      initialForm={{
+        ...data,
+        placeName: data.place,
+      }}
+    />
+  );
 }

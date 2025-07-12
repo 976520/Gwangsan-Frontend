@@ -1,7 +1,7 @@
 import { Image } from '@/entities/notice/model/types';
 import { instance } from '../lib/axios';
 
-export const uploadImages = async (files: File[]): Promise<Image[]> => {
+export const uploadImage = async (files: File[]): Promise<Image[]> => {
   try {
     const responses = await Promise.all(
       files.map(async (file) => {

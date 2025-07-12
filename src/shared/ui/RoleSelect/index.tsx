@@ -30,9 +30,9 @@ export function RoleSelect({
         <SelectValue placeholder="역할 선택" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="일반 계정">일반 계정</SelectItem>
-        <SelectItem value="코디네이터">코디네이터</SelectItem>
-        <SelectItem value="사무국">사무국</SelectItem>
+        <SelectItem value="ROLE_USER">일반 계정</SelectItem>
+        <SelectItem value="ROLE_PLACE_ADMIN">코디네이터</SelectItem>
+        <SelectItem value="ROLE_HEAD_ADMIN">사무국</SelectItem>
       </SelectContent>
     </Select>
   );

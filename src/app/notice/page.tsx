@@ -3,28 +3,20 @@
 import { type Notice } from '@/entities/notice/model/types';
 import { CreateNoticeCard } from '@/features/notice/ui/CreateNoticeCard';
 import NoticeCard from '@/features/notice/ui/NoticeCard';
-import { useEffect, useState } from 'react';
 import { useNotice } from '@/features/notice/lib/useNotice';
+import { useNoticeDetailQuery } from '@/features/notice/lib/useNoticeDetailQuery';
+import { useNoticeList } from '@/features/notice/lib/useNoticeList';
 
 export default function Notice() {
-  const [notices, setNotices] = useState<Notice[]>([]);
-  const { createNotice, refreshNotices, deleteNoticeById } =
-    useNotice(setNotices);
-
-  /**
- *   useEffect(() => {
-    refreshNotices();
-  }, [refreshNotices]);
- */
-
-  useEffect(() => {
-    refreshNotices();
-  }, [refreshNotices]);
+  const { createNotice, deleteNoticeById } = useNotice();
+  const { data: notices } = useNoticeList();
 
   return (
     <div className="space-y-7 px-12 py-2">
       <CreateNoticeCard createNotice={createNotice} />
-      <NoticeCard notices={notices} deleteNotice={deleteNoticeById} />
+      {notices != undefined && (
+        <NoticeCard notices={notices} deleteNotice={deleteNoticeById} />
+      )}
     </div>
   );
 }

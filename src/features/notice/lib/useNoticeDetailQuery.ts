@@ -1,31 +1,19 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { fetchNoticeById } from '@/shared/api/fetchNoticeById';
-import { mockData } from '@/shared/mock/notices';
-export const useNoticeDetailQuery = (id: string) => {
-  return useQuery({
-    queryKey: ['noticeData', id],
-    /*queryFn: async () => {
-      const {
-        title = '',
-        content = '',
-        role = '',
-        placeName = '',
-      } = (await fetchNoticeById(id)) || {};
-      return { title, content, role, images: [], placeName };
-    },*/
-    queryFn: async () => {
-      const notice = mockData.find((n) => n.id === Number(id));
-      if (!notice) throw new Error('해당 공지사항을 찾을 수 없습니다.');
+import { toast } from 'sonner';
+import { Notice } from '@/entities/notice/model/types';
 
-      const { title, content, role, placeName } = notice;
-      return {
-        id: notice.id,
-        title,
-        content,
-        role,
-        placeName,
-        images: [],
-      };
+export const useNoticeDetailQuery = (id: string) => {
+  return useSuspenseQuery({
+    queryKey: ['noticeData', id],
+    queryFn: async () => {
+      const notice = await fetchNoticeById(id);
+      try {
+        return notice;
+      } catch (e) {
+        toast.error('공지사항을 불러오지 못했어요');
+        throw e;
+      }
     },
   });
 };

@@ -1,12 +1,13 @@
 import { FormValues } from '@/features/notice/model/NoticeForm';
 import { instance } from '../lib/axios';
+import { Notice } from '@/entities/notice/model/types';
 
-export const createNotice = async (data: FormValues, imageIds: number[]) => {
+export const createNotice = async (notice: Partial<Notice>) => {
   await instance.post(`/notice`, {
-    title: data.title,
-    content: data.content,
-    placeName: data.placeName,
-    imageIds: imageIds,
-    role: data.role,
+    title: notice.title,
+    content: notice.content,
+    placeName: notice.place ?? '',
+    imageIds: notice.images?.map((image) => image.imageId),
+    roles: [notice.role],
   });
 };

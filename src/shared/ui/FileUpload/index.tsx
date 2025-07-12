@@ -22,8 +22,8 @@ export default function FileUpload({
           ref={inputRef}
           type="file"
           accept="image/*"
-          {...props}
           multiple
+          {...props}
         />
         <Button
           variant="outline"
