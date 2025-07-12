@@ -4,7 +4,9 @@ import { toast } from 'sonner';
 
 export const postPhoneNumber = async (phoneNumber: string) => {
   try {
-    const res = await instance.post('/sms', phoneNumber);
+    await instance.post('/sms', {
+      phoneNumber,
+    });
     toast.success('인증번호가 전송되었습니다.');
   } catch (error) {
     if (error instanceof AxiosError) {
