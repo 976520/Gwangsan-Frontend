@@ -20,6 +20,7 @@ import Specialty from '@/entities/signup/ui/Specialty';
 import { phoneNumberSchema } from '@/shared/model/phoneNumberSchema';
 import { toast } from 'sonner';
 import { postPhoneNumber } from '../api/postPhoneNumber';
+import { Textarea } from '@/components/ui/textarea';
 
 const initialValue = {
   phoneNumber: '',
@@ -241,13 +242,12 @@ export default function SignupForm() {
         <div className="space-y-2">
           <Label htmlFor="description">자기소개</Label>
           <div className="relative">
-            <Input
+            <Textarea
               id="description"
               name="description"
               placeholder="자기소개를 입력하세요"
               className="pl-4"
               required
-              multiple
             />
             <small className="text-red-500">
               {state.error && state.error.description}
