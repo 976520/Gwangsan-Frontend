@@ -21,8 +21,7 @@ export function PlaceSelect({
 }: RoleSelectProps) {
   return (
     <Select
-      value={value}
-      defaultValue={defaultValue}
+      {...(value !== undefined ? { value } : { defaultValue })}
       onValueChange={onChange}
       name={name}
     >

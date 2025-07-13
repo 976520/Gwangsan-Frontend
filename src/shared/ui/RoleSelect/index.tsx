@@ -19,10 +19,10 @@ export function RoleSelect({
   name,
   defaultValue,
 }: RoleSelectProps) {
+  const isControlled = value !== null;
   return (
     <Select
-      value={value}
-      defaultValue={defaultValue}
+      {...(isControlled ? { value } : { defaultValue })}
       onValueChange={onChange}
       name={name}
     >

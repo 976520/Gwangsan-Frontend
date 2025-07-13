@@ -29,7 +29,14 @@ export function CreateNoticeCard({ createNotice }: CreateNoticeCardProps) {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormValues>();
+  } = useForm<FormValues>({
+    defaultValues: {
+      title: '',
+      content: '',
+      role: 'ROLE_USER',
+      placeName: '첨단1',
+    },
+  });
 
   const onSubmit = useCallback(
     (data: FormValues) => {
