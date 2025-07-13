@@ -3,6 +3,7 @@
 import { SignupSchema } from '@/shared/model/authSchema';
 import { toast } from 'sonner';
 import { postSignup } from '../api/postSignup';
+import { redirect } from 'next/navigation';
 
 export const handleSignup = async (
   prevState: {
@@ -37,7 +38,7 @@ export const handleSignup = async (
   const res = await postSignup(value);
   if (res.success) {
     toast.success('회원가입에 성공했습니다.');
-    return { ...prevState, success: true, error: '' };
+    redirect('/login');
   } else {
     toast.error(res.error || '회원가입에 실패했습니다.');
     return {
