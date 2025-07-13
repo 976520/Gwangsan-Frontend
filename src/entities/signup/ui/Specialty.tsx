@@ -24,6 +24,8 @@ export default function Specialty() {
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.nativeEvent.isComposing) return;
+
       if (e.key === 'Enter') {
         e.preventDefault();
         const currentValue = e.currentTarget.value.trim();
