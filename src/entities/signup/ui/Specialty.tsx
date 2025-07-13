@@ -100,6 +100,7 @@ export default function Specialty() {
             filtered.map((specialty, index) => (
               <div
                 key={index}
+                onClick={() => handleAdd(specialty.name)}
                 className="cursor-pointer border-b border-gray-100 px-4 py-2 last:border-b-0 hover:bg-gray-100"
               >
                 {specialty.name}
