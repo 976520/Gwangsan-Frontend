@@ -1,5 +1,6 @@
 import { SigninSchema } from '@/shared/model/authSchema';
 import { postSignin } from '../api/postSignin';
+import { redirect } from 'next/navigation';
 
 export const handleSignin = async (
   prevState: {
@@ -25,7 +26,7 @@ export const handleSignin = async (
 
   const res = await postSignin(value);
   if (res.success) {
-    return { ...prevState, success: true, error: '' };
+    redirect('/member');
   } else {
     return {
       ...prevState,

@@ -8,8 +8,6 @@ import { Label } from '@/components/ui/label';
 import { Lock } from 'lucide-react';
 import { handleSignin } from '../lib/handleSignin';
 import { useActionState } from 'react';
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 
 const initialValue = {
   nickname: '',
@@ -20,13 +18,6 @@ const initialValue = {
 
 export default function SigninForm() {
   const [state, action] = useActionState(handleSignin, initialValue);
-  const router = useRouter();
-
-  useEffect(() => {
-    if (state.success) {
-      router.push('/');
-    }
-  }, [state.success, router]);
 
   return (
     <form action={action}>
