@@ -1,7 +1,4 @@
-'use server';
-
 import { SigninSchema } from '@/shared/model/authSchema';
-import { toast } from 'sonner';
 import { postSignin } from '../api/postSignin';
 
 export const handleSignin = async (
@@ -28,10 +25,8 @@ export const handleSignin = async (
 
   const res = await postSignin(value);
   if (res.success) {
-    toast.success('로그인에 성공했습니다.');
     return { ...prevState, success: true, error: '' };
   } else {
-    toast.error(res.error || '로그인에 실패했습니다.');
     return {
       ...prevState,
       success: false,

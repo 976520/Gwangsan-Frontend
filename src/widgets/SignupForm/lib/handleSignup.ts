@@ -1,5 +1,3 @@
-'use server';
-
 import { SignupSchema } from '@/shared/model/authSchema';
 import { postSignup } from '../api/postSignup';
 import { redirect } from 'next/navigation';
