@@ -1,66 +1,69 @@
 'use client';
 
-import { useCallback } from 'react';
-import { useForm, Controller } from 'react-hook-form';
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from '@/components/ui/card';
-import { Label } from '@radix-ui/react-label';
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { useForm, Controller } from 'react-hook-form';
 import { RoleSelect } from '@/shared/ui/RoleSelect';
 import { PlaceSelect } from '@/shared/ui/PlaceSelect';
 import FileUpload from '@/shared/ui/FileUpload';
-import { Button } from '@/components/ui/button';
-import { FormValues } from '../model/NoticeForm';
+import { FormValues, UpdateFormValues } from '../model/NoticeForm';
+import { useEffect } from 'react';
 
-interface CreateNoticeCardProps {
-  createNotice: (data: FormValues) => void;
+interface EditNoticeModalProps {
+  open: boolean;
+  onClose: () => void;
+  initialNotice: UpdateFormValues;
+  onSave: (updatedNotice: FormValues) => void;
 }
 
-export function CreateNoticeCard({ createNotice }: CreateNoticeCardProps) {
+export function UpdateNoticeModal({
+  open,
+  onClose,
+  initialNotice,
+  onSave,
+}: EditNoticeModalProps) {
   const {
     register,
-    control,
     handleSubmit,
+    control,
     reset,
     formState: { errors },
   } = useForm<FormValues>({
-    defaultValues: {
-      title: '',
-      content: '',
-      role: 'ROLE_USER',
-      placeName: '첨단1',
-    },
+    defaultValues: initialNotice,
   });
 
-  const onSubmit = useCallback(
-    (data: FormValues) => {
-      createNotice(data);
-      reset();
-    },
-    [createNotice, reset],
-  );
+  useEffect(() => {
+    reset(initialNotice);
+  }, [initialNotice, reset]);
+
+  const onSubmit = (data: FormValues) => {
+    onSave(data);
+    onClose();
+  };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>공지사항 작성</CardTitle>
-        <CardDescription>
-          새로운 공지사항을 작성하고 게시할 수 있습니다.
-        </CardDescription>
-      </CardHeader>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <CardContent className="space-y-4">
+    <Dialog open={open} onOpenChange={onClose}>
+      <DialogContent className="max-w-2xl">
+        <DialogHeader>
+          <DialogTitle>공지사항 수정</DialogTitle>
+          <DialogDescription>공지사항 정보를 수정합니다.</DialogDescription>
+        </DialogHeader>
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
-            <Label htmlFor="title">제목</Label>
+            <Label htmlFor="edit-title">제목</Label>
             <Input
-              id="title"
-              placeholder="공지사항 제목을 입력하세요"
+              id="edit-title"
               {...register('title', { required: '제목은 필수입니다.' })}
             />
             {errors.title && (
@@ -69,10 +72,9 @@ export function CreateNoticeCard({ createNotice }: CreateNoticeCardProps) {
           </div>
 
           <div>
-            <Label htmlFor="content">내용</Label>
+            <Label htmlFor="edit-content">내용</Label>
             <Textarea
-              id="content"
-              placeholder="공지사항 내용을 입력하세요"
+              id="edit-content"
               className="min-h-[120px]"
               {...register('content', { required: '내용은 필수입니다.' })}
             />
@@ -101,7 +103,7 @@ export function CreateNoticeCard({ createNotice }: CreateNoticeCardProps) {
             <Controller
               name="placeName"
               control={control}
-              rules={{ required: '대상 구역은 필수입니다.' }}
+              rules={{ required: '지역은 필수입니다.' }}
               render={({ field }) => (
                 <PlaceSelect value={field.value} onChange={field.onChange} />
               )}
@@ -113,14 +115,17 @@ export function CreateNoticeCard({ createNotice }: CreateNoticeCardProps) {
 
           <div>
             <Label>첨부 이미지</Label>
-            <FileUpload id="images" {...register('images')} />
+            <FileUpload id="edit-images" {...register('images')} />
           </div>
 
-          <Button className="w-full" type="submit">
-            공지사항 게시
-          </Button>
-        </CardContent>
-      </form>
-    </Card>
+          <DialogFooter className="gap-2">
+            <Button type="button" variant="outline" onClick={onClose}>
+              취소
+            </Button>
+            <Button type="submit">수정 완료</Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 }

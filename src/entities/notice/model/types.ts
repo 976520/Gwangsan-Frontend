@@ -2,9 +2,13 @@ export interface Notice {
   id: number;
   title: string;
   content: string;
+  place: string;
+  createdAt: string;
   role: string;
-  author: string;
-  date: string;
-  views: number;
-  images?: string[];
+  images?: Image[];
+}
+
+export interface Image {
+  imageId: number;
+  imageUrl: string;
 }

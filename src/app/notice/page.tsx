@@ -3,37 +3,20 @@
 import { type Notice } from '@/entities/notice/model/types';
 import { CreateNoticeCard } from '@/features/notice/ui/CreateNoticeCard';
 import NoticeCard from '@/features/notice/ui/NoticeCard';
-import { fetchNotices } from '@/shared/api/fetchNotices';
-import { useEffect, useState } from 'react';
-import { deleteNotice } from '@/shared/api/deleteNotice';
-import { mockNotices } from '@/shared/mock/notices';
-import { useCreateNotice } from '@/features/notice/lib/useCreateNotice';
+import { useNotice } from '@/features/notice/lib/useNotice';
+import { useNoticeDetailQuery } from '@/features/notice/lib/useNoticeDetailQuery';
+import { useNoticeList } from '@/features/notice/lib/useNoticeList';
 
 export default function Notice() {
-  const [notices, setNotices] = useState<Notice[]>([]);
-
-  const { createNotice } = useCreateNotice(setNotices);
-
-  useEffect(() => {
-    const getNotices = async () => {
-      const newNotices = await fetchNotices();
-      setNotices(newNotices);
-    };
-    getNotices();
-
-    // TODO 목데이터 나중에 지우기
-    setNotices(mockNotices);
-  }, []);
-
-  const deleteNoticeInList = (id: number) => {
-    deleteNotice(id);
-    setNotices((prev) => prev.filter((notice) => notice.id != id));
-  };
+  const { createNotice, deleteNoticeById } = useNotice();
+  const { data: notices } = useNoticeList();
 
   return (
     <div className="space-y-7 px-12 py-2">
       <CreateNoticeCard createNotice={createNotice} />
-      <NoticeCard notices={notices} deleteNotice={deleteNoticeInList} />
+      {notices != undefined && (
+        <NoticeCard notices={notices} deleteNotice={deleteNoticeById} />
+      )}
     </div>
   );
 }

@@ -1,8 +1,11 @@
-import { FormValues } from '@/features/notice/model/NoticeForm';
+import {
+  FormValues,
+  UpdateFormValues,
+} from '@/features/notice/model/NoticeForm';
 import { UpdateNoticeCard } from '@/features/notice/ui/UpdateNoticeCard';
 
 interface UpdateNoticeViewProps {
-  initialForm: FormValues | null;
+  initialForm: UpdateFormValues | undefined;
   updateNotice: (changedForm: FormValues) => void;
 }
 

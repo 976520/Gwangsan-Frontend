@@ -9,14 +9,22 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { ArrowLeft, Calendar, Eye, User } from 'lucide-react';
+import { ArrowLeft, Calendar } from 'lucide-react';
 import { Notice } from '@/entities/notice/model/types';
 import Image from 'next/image';
-
+import dayjs from 'dayjs';
+import { Badge } from '@/components/ui/badge';
+import { MapPin } from 'lucide-react';
 interface NoticeDetailProps {
   notice: Notice;
   onBack: () => void;
 }
+const getPlaceBadgeColor = (placeName: string) => {
+  if (placeName === '전체') {
+    return 'bg-purple-100 text-purple-800 border-purple-200';
+  }
+  return 'bg-blue-100 text-blue-800 border-blue-200';
+};
 
 export default function NoticeDetail({ notice, onBack }: NoticeDetailProps) {
   return (
@@ -30,21 +38,28 @@ export default function NoticeDetail({ notice, onBack }: NoticeDetailProps) {
           <div className="flex items-center space-x-2 text-sm text-gray-500">
             <span className="flex items-center">
               <Calendar className="mr-1 h-4 w-4" />
-              {notice.date}
-            </span>
-            <span className="flex items-center">
-              <Eye className="mr-1 h-4 w-4" />
-              조회 {notice.views}
+              {dayjs(notice.createdAt).format('YYYY년 MM월 DD일')}
             </span>
           </div>
         </div>
+        {notice.place && (
+          <div className="mb-4">
+            <Badge
+              variant="outline"
+              className={`inline-flex items-center gap-2 ${getPlaceBadgeColor(notice.place)} px-3 py-1.5 text-sm font-medium`}
+            >
+              <MapPin className="h-4 w-4  text-current" />{' '}
+              {notice.place === '전체'
+                ? '전체 지점 공지사항'
+                : `${notice.place} 지점 공지사항`}
+            </Badge>
+          </div>
+        )}
+
         <CardTitle className="text-3xl font-bold">{notice.title}</CardTitle>
         <div className="mt-3 flex flex-wrap items-center gap-3">
-          <div className="flex items-center">
-            <User className="mr-1 h-4 w-4 text-gray-500" />
-            <span>{notice.author}</span>
-          </div>
           <BadgeSelect role={notice.role}>{notice.role}</BadgeSelect>
+          <Badge variant="outline">{notice.place}</Badge>
         </div>
       </CardHeader>
 
@@ -53,11 +68,11 @@ export default function NoticeDetail({ notice, onBack }: NoticeDetailProps) {
           <div className="flex justify-center">
             {notice.images?.map((image) => (
               <Image
-                key={image}
-                src={image}
+                key={image.imageId}
+                src={image.imageUrl}
                 alt={notice.title}
-                width={800} // 예시 값, 상황에 맞게 조절
-                height={500} // 예시 값, 상황에 맞게 조절
+                width={800}
+                height={500}
                 className="h-auto max-h-[500px] w-auto rounded-lg object-contain"
               />
             ))}
