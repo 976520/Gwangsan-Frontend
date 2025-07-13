@@ -259,7 +259,9 @@ export default function SignupForm() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="description">자기소개</Label>
+          <Label htmlFor="description">
+            자기소개 <span className="text-red-500">*</span>
+          </Label>
           <div className="relative">
             <Textarea
               id="description"
