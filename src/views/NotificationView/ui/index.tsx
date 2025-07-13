@@ -1,9 +1,9 @@
-import NotificationCard from '@/widgets/NotificationCard/ui';
+import NotificationList from '@/widgets/NotificationList/ui';
 
 const NotificationView: React.FC = () => {
   return (
-    <section className="space-y-6 mx-4">
-      <NotificationCard />
+    <section className="mx-4 space-y-6">
+      <NotificationList />
     </section>
   );
 };
