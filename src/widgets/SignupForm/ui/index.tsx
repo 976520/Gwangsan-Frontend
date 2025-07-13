@@ -135,6 +135,35 @@ export default function SignupForm() {
           </div>
         </div>
         <div className="space-y-2">
+          <Label htmlFor="verificationCode">인증번호</Label>
+          <span className="text-red-500">*</span>
+          <div className="flex space-x-2">
+            <div className="relative flex-1">
+              <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Input
+                ref={VerificationRef}
+                id="verificationCode"
+                name="verificationCode"
+                placeholder="6자리 인증번호"
+                className="pl-10"
+                maxLength={6}
+                minLength={6}
+                required
+              />
+              <small className="text-red-500">
+                {state.error && state.error.verificationCode}
+              </small>
+            </div>
+            <Button
+              onClick={handleVerificationCodeCheck}
+              type="button"
+              className="whitespace-nowrap"
+            >
+              확인
+            </Button>
+          </div>
+        </div>
+        <div className="space-y-2">
           <Label htmlFor="dongName">
             동 선택 <span className="text-red-500">*</span>
           </Label>
@@ -187,36 +216,6 @@ export default function SignupForm() {
         <small className="text-red-500">
           {state.error && state.error.recommender}
         </small>
-
-        <div className="space-y-2">
-          <Label htmlFor="verificationCode">인증번호</Label>
-          <span className="text-red-500">*</span>
-          <div className="flex space-x-2">
-            <div className="relative flex-1">
-              <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-              <Input
-                ref={VerificationRef}
-                id="verificationCode"
-                name="verificationCode"
-                placeholder="6자리 인증번호"
-                className="pl-10"
-                maxLength={6}
-                minLength={6}
-                required
-              />
-              <small className="text-red-500">
-                {state.error && state.error.verificationCode}
-              </small>
-            </div>
-            <Button
-              onClick={handleVerificationCodeCheck}
-              type="button"
-              className="whitespace-nowrap"
-            >
-              확인
-            </Button>
-          </div>
-        </div>
 
         <div className="space-y-2">
           <Label htmlFor="password">비밀번호</Label>
