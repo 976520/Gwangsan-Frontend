@@ -21,6 +21,7 @@ import { phoneNumberSchema } from '@/shared/model/phoneNumberSchema';
 import { toast } from 'sonner';
 import { postPhoneNumber } from '../api/postPhoneNumber';
 import { Textarea } from '@/components/ui/textarea';
+import { checkVerificationCode } from '../api/checkVerificationCode';
 
 const initialValue = {
   phoneNumber: '',
@@ -28,7 +29,7 @@ const initialValue = {
   success: false,
   verificationCode: '',
   nickname: '',
-  placeId: '',
+  placeName: '',
   description: '',
   error: '' as '' | SignupError,
 };
@@ -51,6 +52,22 @@ export default function SignupForm() {
       setCodeSent(true);
     }
   };
+
+  const handleVerificationCodeCheck = async () => {
+    const verificationCode = VerificationRef.current?.value || '';
+    const phoneNumber = phoneInputRef.current?.value || '';
+    if (verificationCode.length !== 6) {
+      toast.error('인증번호는 6자리여야 합니다.');
+      return;
+    }
+    const res = await checkVerificationCode(verificationCode, phoneNumber);
+    if (res) {
+      toast.success('인증번호가 확인되었습니다.');
+    } else {
+      toast.error('인증번호가 일치하지 않습니다. 다시 시도해주세요.');
+    }
+  };
+
   return (
     <form action={action}>
       <CardContent className="space-y-4">
@@ -118,11 +135,11 @@ export default function SignupForm() {
           </div>
         </div>
         <div className="space-y-2">
-          <Label htmlFor="dongId">
+          <Label htmlFor="dongName">
             동 선택 <span className="text-red-500">*</span>
           </Label>
-          <Select name="dongId">
-            <SelectTrigger id="dongId">
+          <Select name="dongName">
+            <SelectTrigger id="dongName">
               <SelectValue placeholder="동을 선택하세요" />
             </SelectTrigger>
             <SelectContent>
@@ -134,15 +151,15 @@ export default function SignupForm() {
             </SelectContent>
           </Select>
           <small className="text-red-500">
-            {state.error && state.error.dongId}
+            {state.error && state.error.dongName}
           </small>
         </div>
         <div className="space-y-2">
-          <Label htmlFor="placeId">
+          <Label htmlFor="placeName">
             지점 <span className="text-red-500">*</span>
           </Label>
-          <Select name="placeId">
-            <SelectTrigger id="placeId">
+          <Select name="placeName">
+            <SelectTrigger id="placeName">
               <SelectValue placeholder="지점을 선택하세요" />
             </SelectTrigger>
             <SelectContent>
@@ -152,10 +169,9 @@ export default function SignupForm() {
                 </SelectItem>
               ))}
             </SelectContent>
-              
           </Select>
           <small className="text-red-500">
-            {state.error && state.error.placeId}
+            {state.error && state.error.placeName}
           </small>
         </div>
         <Label htmlFor="recommender">
@@ -192,7 +208,11 @@ export default function SignupForm() {
                 {state.error && state.error.verificationCode}
               </small>
             </div>
-            <Button type="button" className="whitespace-nowrap">
+            <Button
+              onClick={handleVerificationCodeCheck}
+              type="button"
+              className="whitespace-nowrap"
+            >
               확인
             </Button>
           </div>

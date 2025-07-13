@@ -9,8 +9,8 @@ export const SigninSchema = z.object({
 export const SignupSchema = SigninSchema.extend({
   verificationCode: z.string().length(6, '인증번호는 6자리여야 합니다.'),
   nickname: z.string().regex(/^[가-힣]+$/, '닉네임은 한글만 입력 가능합니다.'),
-  placeId: z.number().int(),
-  dongId: z.number().int(),
+  placeName: z.number().int(),
+  dongName: z.number().int(),
   specialties: z.string().array().min(1, '전문분야를 선택해주세요.'),
   description: z
     .string()

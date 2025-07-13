@@ -3,8 +3,8 @@ interface SignupError {
   password?: string[];
   verificationCode?: string[];
   nickname?: string[];
-  placeId?: string[];
-  dongId?: string[];
+  placeName?: string[];
+  dongName?: string[];
   specialties?: string[];
   name?: string[];
   recommender?: string[];
