@@ -5,17 +5,17 @@ import { Button } from '@/components/ui/button';
 import { CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Phone, Lock } from 'lucide-react';
+import { Lock } from 'lucide-react';
 import { handleSignin } from '../lib/handleSignin';
 import { useActionState } from 'react';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 const initialValue = {
-  phoneNumber: '',
+  nickname: '',
   password: '',
   success: false,
-  error: '' as '' | { phoneNumber?: string[]; password?: string[] },
+  error: '' as '' | { nickname?: string[]; password?: string[] },
 };
 
 export default function SigninForm() {
@@ -32,19 +32,18 @@ export default function SigninForm() {
     <form action={action}>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="phone">전화번호</Label>
+          <Label htmlFor="nickname">별칭 (한글)</Label>
           <div className="relative">
-            <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
             <Input
-              id="phone"
-              name="phoneNumber"
+              id="nickname"
+              name="nickname"
               type="tel"
               placeholder="010-1234-5678"
               className="pl-10"
               maxLength={13}
               required
             />
-            {state?.error && <small>{state.error.phoneNumber}</small>}
+            {state?.error && <small>{state.error.nickname}</small>}
           </div>
         </div>
 

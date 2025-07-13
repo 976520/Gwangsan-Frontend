@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { phoneNumberSchema } from './phoneNumberSchema';
 
 export const SigninSchema = z.object({
-  phoneNumber: phoneNumberSchema,
+  nickname: z.string().regex(/^[가-힣]+$/, '닉네임은 한글만 입력 가능합니다.'),
   password: z.string().min(8, '비밀번호는 최소 8자리 이상이어야 합니다.'),
 });
 
@@ -11,10 +11,10 @@ export const SignupSchema = SigninSchema.extend({
     .string()
     .length(6, '인증번호는 6자리여야 합니다.')
     .optional(),
-  nickname: z.string().regex(/^[가-힣]+$/, '닉네임은 한글만 입력 가능합니다.'),
   placeName: z.string(),
   dongName: z.string(),
   specialties: z.string().array().min(1, '전문분야를 선택해주세요.'),
+  phoneNumber: phoneNumberSchema,
   description: z
     .string()
     .max(100, '자기소개는 최대 100자까지 입력 가능합니다.'),

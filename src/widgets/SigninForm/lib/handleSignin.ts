@@ -4,15 +4,15 @@ import { postSignin } from '../api/postSignin';
 export const handleSignin = async (
   prevState: {
     success: boolean;
-    error: '' | { phoneNumber?: string[]; password?: string[] };
+    error: '' | { nickname?: string[]; password?: string[] };
   },
   formData: FormData,
 ): Promise<{
   success: boolean;
-  error: '' | { phoneNumber?: string[]; password?: string[] };
+  error: '' | { nickname?: string[]; password?: string[] };
 }> => {
   const value = {
-    phoneNumber: formData.get('phoneNumber') as string,
+    nickname: formData.get('nickname') as string,
     password: formData.get('password') as string,
   };
 
