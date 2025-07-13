@@ -39,7 +39,7 @@ export default function SignupForm() {
   const [state, action] = useActionState(handleSignup, initialValue);
   const [codeSent, setCodeSent] = useState(false);
   const phoneInputRef = useRef<HTMLInputElement>(null);
-  const VerificationRef = useRef<HTMLInputElement>(null);
+  const verificationRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (codeSent) {
@@ -67,7 +67,7 @@ export default function SignupForm() {
   };
 
   const handleVerificationCodeCheck = async () => {
-    const verificationCode = VerificationRef.current?.value || '';
+    const verificationCode = verificationRef.current?.value || '';
     const phoneNumber = phoneInputRef.current?.value || '';
     if (verificationCode.length !== 6) {
       toast.error('인증번호는 6자리여야 합니다.');
@@ -154,7 +154,7 @@ export default function SignupForm() {
             <div className="relative flex-1">
               <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
               <Input
-                ref={VerificationRef}
+                ref={verificationRef}
                 id="verificationCode"
                 name="verificationCode"
                 placeholder="6자리 인증번호"
