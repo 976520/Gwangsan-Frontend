@@ -1,5 +1,10 @@
-import axios, { AxiosError, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, {
+  AxiosError,
+  InternalAxiosRequestConfig,
+  AxiosResponse,
+} from 'axios';
 import { authConfig } from '../config/auth';
+import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 
 export const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -13,9 +18,9 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    const accessToken = getCookie('accessToken');
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;
   },
@@ -29,29 +34,34 @@ instance.interceptors.response.use(
     return response;
   },
   async (error: AxiosError) => {
-    const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
+    const originalRequest = error.config as InternalAxiosRequestConfig & {
+      _retry?: boolean;
+    };
 
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       try {
-        const refreshToken = localStorage.getItem('refreshToken');
+        /* const refreshToken = getCookie('refreshToken');
         if (!refreshToken) {
-          throw new Error('No refresh token');
+          throw new Error('No refresh accessToken');
         }
 
-        const response = await instance.post<{ token: string }>('/auth/refresh', {
-          refreshToken,
-        });
+        const response = await instance.post<{ accessToken: string }>(
+          '/auth/reissue',
+          {
+            refreshToken,
+          },
+        );
 
-        const { token } = response.data;
-        localStorage.setItem('token', token);
+        const { accessToken } = response.data;
+        setCookie('accessToken', accessToken); */
 
-        originalRequest.headers.Authorization = `Bearer ${token}`;
+        // originalRequest.headers.Authorization = `Bearer ${accessToken}`;
         return instance(originalRequest);
       } catch (error) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('refreshToken');
+        deleteCookie('accessToken');
+        deleteCookie('refreshToken');
         window.location.href = authConfig.signInPage;
         return Promise.reject(error);
       }
@@ -59,4 +69,4 @@ instance.interceptors.response.use(
 
     return Promise.reject(error);
   },
-); 
+);
