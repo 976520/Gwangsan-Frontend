@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import {
   Card,
   CardContent,
@@ -9,30 +8,11 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import ReportCard from '@/features/notification/ui/ReportCard';
-import {
-  NotificationData,
-  NotificationStatus,
-} from '@/entities/notification/model/notificationType';
-import { mockNotifications } from '../mock/mockNotifications';
-
+import SignupCard from '@/features/notification/ui/SignUpCard';
+import TradeCard from '@/features/notification/ui/TradeCard';
+import { useGetNotification } from '@/views/NotificationView/model/useGetNotification';
 const NotificationList: React.FC = () => {
-  const [notifications, setNotifications] =
-    useState<NotificationData[]>(mockNotifications);
-
-  const handleNotificationAction = (id: string, action: string) => {
-    setNotifications((prev) =>
-      prev.map((notification) =>
-        notification.id === id
-          ? { ...notification, status: action as NotificationStatus }
-          : notification,
-      ),
-    );
-  };
-
-  const handleMemberSuspend = (userId: string, days: number) => {
-    console.log(`회원 ${userId}을(를) ${days}일 정지 처리`);
-  };
-
+  const { data: notifications } = useGetNotification();
   return (
     <Card>
       <CardHeader>
@@ -43,14 +23,15 @@ const NotificationList: React.FC = () => {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          {notifications.map((notification) => (
-            <ReportCard
-              key={notification.id}
-              notification={notification}
-              onAction={handleNotificationAction}
-              onMemberSuspend={handleMemberSuspend}
-            />
+          {notifications?.reports.map((v) => (
+            <ReportCard key={v.productId} data={v} />
           ))}
+          {notifications?.signUps.map((v) => {
+            return <SignupCard data={v} key={v.memberId} />;
+          })}
+          {notifications?.trades.map((v) => {
+            return <TradeCard data={v} key={v.product.id} />;
+          })}
         </div>
       </CardContent>
     </Card>
