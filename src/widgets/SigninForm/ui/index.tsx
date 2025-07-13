@@ -37,9 +37,7 @@ export default function SigninForm() {
             <Input
               id="nickname"
               name="nickname"
-              type="tel"
-              placeholder="010-1234-5678"
-              className="pl-10"
+              placeholder="별칭을 입력하세요"
               maxLength={13}
               required
             />
