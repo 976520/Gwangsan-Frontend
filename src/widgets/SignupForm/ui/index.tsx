@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/select';
 import { DONG_LIST, PLACE_LIST } from '../model/locations';
 import { useActionState, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import { handleSignup } from '../lib/handleSignup';
 import Specialty from '@/entities/signup/ui/Specialty';
 import { phoneNumberSchema } from '@/shared/model/phoneNumberSchema';
@@ -39,6 +40,18 @@ export default function SignupForm() {
   const [codeSent, setCodeSent] = useState(false);
   const phoneInputRef = useRef<HTMLInputElement>(null);
   const VerificationRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (codeSent) {
+      const timer = setTimeout(
+        () => {
+          setCodeSent(false);
+        },
+        5 * 60 * 1000,
+      );
+      return () => clearTimeout(timer);
+    }
+  }, [codeSent]);
 
   const handleSendVerificationCode = () => {
     const phoneNumber = phoneInputRef.current?.value || '';
